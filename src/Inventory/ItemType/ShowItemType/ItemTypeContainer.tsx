@@ -3,21 +3,23 @@ import Axios from "axios";
 import ItemTypeList from "./ItemTypeList";
 
 
-const getData = async () => {
 
-    const apiUrl: string = "http://127.0.0.1:3100/api/ItemType";
-    const response = await Axios.get(apiUrl);
-    return response.data
-};
 
 
 class ItemTypeContainer extends React.Component {
 
     state = {data: [], status: 'LOADING'};
 
+     getData = async () => {
+
+        const apiUrl: string = "http://127.0.0.1:3100/api/ItemType";
+        const response = await Axios.get(apiUrl);
+        return response.data
+    };
+
 
     componentDidMount() {
-        getData().then(data => {
+        this.getData().then(data => {
             console.log(data)
             this.setState({data: data, status: 'SUCCESS'})
         }).catch(e => {

@@ -1,12 +1,16 @@
 import {Component} from "react";
 import ItemTypeCard from "./ItemTypeCard";
 
-class ItemTypeList extends Component<{ ItemTypes: any[] }> {
+interface Props {
+    ItemTypes : any[];
+}
+
+class ItemTypeList extends Component<Props> {
 
 
     render() {
         const ItemTypes: any[] = this.props.ItemTypes
-        return  ItemTypes.map(ItemType => <ItemTypeCard ItemType={ItemType} />)
+        return ItemTypes.map((ItemType, index) => <ItemTypeCard key={index} ItemType={ItemType}/>)
     }
 }
 

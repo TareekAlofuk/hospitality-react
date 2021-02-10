@@ -1,11 +1,15 @@
 import {Component} from "react";
 
-export interface ItemType {
+interface ItemType {
     name: string;
     _id: string;
 }
 
-class ItemTypeCard extends Component<{ ItemType: ItemType }> {
+interface Props {
+    ItemType : ItemType;
+}
+
+class ItemTypeCard extends Component<Props> {
     render() {
         return (
             <div>
