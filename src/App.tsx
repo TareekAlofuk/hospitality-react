@@ -1,9 +1,10 @@
 import React from 'react';
+import ItemTypeContainer from "./Inventory/ItemType/ShowItemType/ItemTypeContainer";
 
 function App() {
   return (
     <div className="App">
-      <div>start</div>
+        <ItemTypeContainer/>
     </div>
   );
 }
