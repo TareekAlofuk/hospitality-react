@@ -1,7 +1,6 @@
 import {Component} from "react";
 import {Form} from "@autofiy/raf-core";
 import {Text} from "@autofiy/raf-material";
-import AddItemTypeSubmitter from "./AddItemTypeSubmitter";
 import {Button} from "@material-ui/core";
 import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
 

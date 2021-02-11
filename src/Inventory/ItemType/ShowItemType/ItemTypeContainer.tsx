@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import ItemTypeList from "./ItemTypeList";
+import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
 
 
 
@@ -11,11 +12,14 @@ class ItemTypeContainer extends React.Component {
     state = {data: [], status: 'LOADING'};
 
      getData = async () => {
-
-        const apiUrl: string = "http://127.0.0.1:3100/api/ItemType";
+        const apiUrl: string = Endpoints.item_type.get
         const response = await Axios.get(apiUrl);
         return response.data
     };
+     onDelete = (id:string) =>{
+        const itemTypeAfterDelete =  this.state.data.filter((itemType:any) => itemType._id !== id);
+        this.setState({data:itemTypeAfterDelete})
+     }
 
 
     componentDidMount() {
@@ -33,7 +37,7 @@ class ItemTypeContainer extends React.Component {
             return <div>Loading</div>
         } else if (this.state.status === 'SUCCESS') {
             if (this.state.data.length) {
-                return <ItemTypeList ItemTypes={this.state.data}/>
+                return <ItemTypeList onDelete={this.onDelete} ItemTypes={this.state.data} />
             } else {
                 return <div>their is no item type available</div>
 
