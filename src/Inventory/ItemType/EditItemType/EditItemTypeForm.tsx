@@ -1,33 +1,37 @@
 import {Component} from "react";
-import {Form, GlobalEvents} from "@autofiy/raf-core";
+import {Form} from "@autofiy/raf-core";
 import {Text} from "@autofiy/raf-material";
 import {Button} from "@material-ui/core";
 import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
+import {withRouter , RouteComponentProps} from "react-router-dom";
 
-class AddItemTypeForm extends Component {
 
 
+
+interface Props extends RouteComponentProps<any>  {
+    itemType:any
+}
+class EditItemTypeForm extends Component<Props> {
 
     render() {
+        const {itemType}:any = this.props.location.state
         return (<div style={{width: "30vw"}}>
                 <Form fields={[
                     {as: Text, name: 'name', extra: {label: 'Item Type'}}
                 ]}
-
-                      listen={{
-                          [GlobalEvents.SUBMIT_FAILED] : (form, data) => alert("ali")
-                      }}
+                      initialValues={itemType}
 
                       extra={{
                           renderOptions: {
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
-                                                         onClick={() => form.submit()}>ADD</Button>
+                                                         onClick={() => form.submit()}>EDIT</Button>
                               ],
                               actionsAlignments: "center"
                           },
                           submitOptions : {
-                              url : Endpoints.item_type.add
+                              method:'PATCH',
+                              url : Endpoints.item_type.edit(itemType._id)
                           }
                       }}
                 />
@@ -37,4 +41,4 @@ class AddItemTypeForm extends Component {
 
 }
 
-export default AddItemTypeForm
+export default  withRouter(EditItemTypeForm)

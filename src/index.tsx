@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {setupRafMaterial} from "@autofiy/raf-material";
+import {BrowserRouter  } from "react-router-dom";
 
 setupRafMaterial();
 
 ReactDOM.render(
-    <App /> ,
+    <BrowserRouter>
+    <App />
+    </BrowserRouter>
+    ,
   document.getElementById('root')
 );
 

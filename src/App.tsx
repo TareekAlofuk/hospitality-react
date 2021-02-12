@@ -1,12 +1,10 @@
 import React from 'react';
-import ItemTypeContainer from "./Inventory/ItemType/ShowItemType/ItemTypeContainer";
-import AddItemTypeForm from "./Inventory/ItemType/AddItemType/AddItemTypeForm";
+import InventoryRoutes from "./Inventory/Routes/InventoryRoutes";
 
 function App() {
   return (
     <div className="App">
-        <AddItemTypeForm/>
-        <ItemTypeContainer/>
+        <InventoryRoutes/>
     </div>
   );
 }
