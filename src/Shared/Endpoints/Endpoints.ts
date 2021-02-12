@@ -5,6 +5,12 @@ export interface IEndpoints {
         delete: (id: string) => string;
         edit: (id: string) => string;
     }
+    room: {
+        get: string;
+        add: string;
+        delete: (id: string) => string;
+        edit: (id: string) => string;
+    }
 }
 
 function makeEndpoint(route: string): string {
@@ -27,5 +33,16 @@ export const Endpoints: IEndpoints = {
         edit: (id: string): string => {
             return makeEndpointWithId("ItemType/Update", id)
         },
+    },
+    room:{
+        get: makeEndpoint("Room"),
+        add: makeEndpoint("Room/Add"),
+        delete: (id: string): string => {
+            return makeEndpointWithId("Room/Delete", id)
+        },
+        edit: (id: string): string => {
+            return makeEndpointWithId("Room/Update", id)
+        },
+
     }
 }
