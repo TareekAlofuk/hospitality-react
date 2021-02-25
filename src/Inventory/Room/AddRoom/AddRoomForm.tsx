@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form, GlobalEvents} from "@autofiy/raf-core";
 import {Text} from "@autofiy/raf-material";
-import {Button} from "@material-ui/core";
+import {Button , Grid , Box} from "@material-ui/core";
 import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
 
 class AddRoomForm extends Component {
@@ -9,7 +9,8 @@ class AddRoomForm extends Component {
 
 
     render() {
-        return (<div style={{width: "30vw"}}>
+        return (<Box  m={4} >
+            <Grid  item  xs={12} >
                 <Form fields={[
                     {as: Text, name: 'name', extra: {label: 'Room name'}}
                 ]}
@@ -31,8 +32,8 @@ class AddRoomForm extends Component {
                           }
                       }}
                 />
-            </div>
-        );
+            </Grid>
+        </Box>        );
     }
 
 }

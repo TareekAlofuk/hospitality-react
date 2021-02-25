@@ -1,21 +1,21 @@
 import {Component} from "react";
 import {Form} from "@autofiy/raf-core";
 import {Text} from "@autofiy/raf-material";
-import {Button} from "@material-ui/core";
+import {Box, Button, Grid} from "@material-ui/core";
 import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
-import {withRouter , RouteComponentProps} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 
-
-
-interface Props extends RouteComponentProps<any>  {
-    room:any
+interface Props extends RouteComponentProps<any> {
+    room: any
 }
+
 class EditRoomForm extends Component<Props> {
 
     render() {
-        const {room}:any = this.props.location.state
-        return (<div style={{width: "30vw"}}>
+        const {room}: any = this.props.location.state
+        return (<Box m={4}>
+            <Grid item xs={12}>
                 <Form fields={[
                     {as: Text, name: 'name', extra: {label: 'Room name'}}
                 ]}
@@ -29,16 +29,16 @@ class EditRoomForm extends Component<Props> {
                               ],
                               actionsAlignments: "center"
                           },
-                          submitOptions : {
-                              method:'PATCH',
-                              url : Endpoints.room.edit(room._id)
+                          submitOptions: {
+                              method: 'PATCH',
+                              url: Endpoints.room.edit(room._id)
                           }
                       }}
                 />
-            </div>
-        );
+            </Grid>
+        </Box>);
     }
 
 }
 
-export default  withRouter(EditRoomForm)
+export default withRouter(EditRoomForm)

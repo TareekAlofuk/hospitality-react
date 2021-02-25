@@ -1,10 +1,10 @@
-import React from 'react';
-import InventoryRoutes from "./Inventory/Routes/InventoryRoutes";
+import RoutesContainer from "./Routes/RoutesContainer";
+import AddItemContainer from "./Inventory/Item/AddItem/AddItemContainer"
 
 function App() {
-  return (
+    return (
     <div className="App">
-        <InventoryRoutes/>
+        <RoutesContainer/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form, GlobalEvents} from "@autofiy/raf-core";
 import {Text} from "@autofiy/raf-material";
-import {Button} from "@material-ui/core";
+import {Button ,Grid,Box} from "@material-ui/core";
 import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
 
 class AddItemTypeForm extends Component {
@@ -9,7 +9,8 @@ class AddItemTypeForm extends Component {
 
 
     render() {
-        return (<div style={{width: "30vw"}}>
+        return (<Box  m={4} >
+                 <Grid  item  xs={12} >
                 <Form fields={[
                     {as: Text, name: 'name', extra: {label: 'Item Type'}}
                 ]}
@@ -20,6 +21,8 @@ class AddItemTypeForm extends Component {
 
                       extra={{
                           renderOptions: {
+                              header: 'Add Item type',
+
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
                                                          onClick={() => form.submit()}>ADD</Button>
@@ -31,7 +34,8 @@ class AddItemTypeForm extends Component {
                           }
                       }}
                 />
-            </div>
+            </Grid>
+            </Box>
         );
     }
 

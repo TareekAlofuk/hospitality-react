@@ -1,26 +1,17 @@
-import React from "react";
+import {Component} from 'react'
 import Axios from "axios";
 import {Endpoints} from "../../../Shared/Endpoints/Endpoints";
 import {AutoCollection, IAutoCollection} from "@autofiy/rac-core";
 import {Table} from "@autofiy/rac-material";
-import {Button, Grid, TableCell} from "@material-ui/core";
-import {Link} from "react-router-dom"
-import AddIcon from '@material-ui/icons/Add';
+import {Button, TableCell} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
+class ShowAdmins extends Component {
 
-class ItemTypeContainer extends React.Component {
-
-    state = {data: [], status: 'LOADING'};
-
-    getData = async () => {
-        const apiUrl: string = Endpoints.item_type.get
-        const response = await Axios.get(apiUrl);
-        return response.data
-    };
     onDelete = async (autoCollection: any, metadata: any, data: any) => {
-        if (window.confirm('Are you sure you want to delete this item type')) {
+        if (window.confirm('Are you sure you want to delete this Admin')) {
             try {
-                await Axios.delete(Endpoints.item_type.delete(data._id));
+                await Axios.delete(Endpoints.admin.delete(data._id));
                 const {index} = metadata;
                 autoCollection.data().removeAt(index, undefined);
             } catch (e) {
@@ -29,37 +20,25 @@ class ItemTypeContainer extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.getData().then(data => {
-            console.log(data)
-            this.setState({data: data, status: 'SUCCESS'})
-        }).catch(e => {
-            this.setState({data: [], status: 'ERROR'})
-        })
-    }
-
-
     render() {
-        return <Grid container spacing={2} justify="center" >
+        return <div style={{width: "40vw"}}>
 
-            <Grid item xs={3}>
-                <Button
-                    startIcon={<AddIcon />}
-                    component={Link}
-                    to={'./AddItemType'}
-                    variant={'contained'}
-                >
-                    ADD
-                </Button>
-            </Grid>
 
-            <Grid item xs={10}>
+            <Button
+                component={Link}
+                to={'./AddAdmin'}
+                variant={'contained'}
+            >
+                ADD
+            </Button>
+
             <AutoCollection as={Table}
                             properties={{
-                                orderBy: ['name', 'actions'],
+                                orderBy: ['name', 'email', 'actions' ],
                                 extraProperties: [
                                     {name: 'actions', title: 'Actions'}
                                 ],
+
                                 renderValue: {
                                     actions: (property, data, metadata, autoCollection: IAutoCollection) => {
                                         return <TableCell>
@@ -69,29 +48,27 @@ class ItemTypeContainer extends React.Component {
                                             <Button
                                                 component={Link}
                                                 to={{
-                                                    pathname: './EditItemType',
+                                                    pathname: './EditAdmin',
                                                     state:
                                                         {
-                                                            itemType: data
+                                                            admin: data
                                                         }
                                                 }}>EDIT</Button>
 
                                         </TableCell>
                                     }
+
                                 }
                             }}
                             extra={{
                                 dataSourceOptions: {
-                                    url: Endpoints.item_type.get
+                                    url: Endpoints.admin.get
                                 }
                             }}
-            />
-            </Grid>
-
-        </Grid>
-
+            /></div>
     }
+
+
 }
 
-
-export default ItemTypeContainer
+export default ShowAdmins

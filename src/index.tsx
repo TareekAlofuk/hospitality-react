@@ -1,15 +1,25 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {setupRafMaterial} from "@autofiy/raf-material";
 import {BrowserRouter  } from "react-router-dom";
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+
 
 setupRafMaterial();
+const  them = createMuiTheme({
+    palette:{
 
+    }
+
+})
 ReactDOM.render(
     <BrowserRouter>
+        <ThemeProvider theme={them}>
     <App />
+        </ThemeProvider>
     </BrowserRouter>
     ,
   document.getElementById('root')
