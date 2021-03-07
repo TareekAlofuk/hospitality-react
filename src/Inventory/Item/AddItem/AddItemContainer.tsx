@@ -27,7 +27,7 @@ class AddItemContainer extends Component {
     componentDidMount() {
         this.getData().then(data => {
             const itemTypes: any[] = data
-            itemTypes.map(itemType => {
+            itemTypes.forEach(itemType => {
                 // this.state.itemTypeRadios.push({text:itemType.name , value:itemType.name})
                 this.setState((prevState: any) => ({
                     itemTypeRadios: [...prevState.itemTypeRadios, {

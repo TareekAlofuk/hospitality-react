@@ -34,7 +34,7 @@ class ShowItem extends Component {
 
             <AutoCollection as={Table}
                             properties={{
-                                orderBy: ['name', 'type', 'image', 'actions'],
+                                orderBy: ['itemName', 'type', 'image', 'actions'],
                                 extraProperties: [
                                     {name: 'actions', title: 'Actions'}
                                 ],

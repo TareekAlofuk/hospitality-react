@@ -5,7 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {setupRafMaterial} from "@autofiy/raf-material";
 import {BrowserRouter  } from "react-router-dom";
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {Provider} from 'react-redux';
+import Store from "./Store/Store";
 
 
 setupRafMaterial();
@@ -17,9 +19,11 @@ const  them = createMuiTheme({
 })
 ReactDOM.render(
     <BrowserRouter>
+        <Provider store={Store}>
         <ThemeProvider theme={them}>
     <App />
         </ThemeProvider>
+        </Provider>
     </BrowserRouter>
     ,
   document.getElementById('root')

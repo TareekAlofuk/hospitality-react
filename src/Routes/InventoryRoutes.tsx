@@ -9,6 +9,7 @@ import EditRoomForm from "../Inventory/Room/EditRoom/EditRoomForm";
 import ShowItem from "../Inventory/Item/ShowItem/ShowItem";
 import AddItemContainer from "../Inventory/Item/AddItem/AddItemContainer";
 import EditItemContainer from "../Inventory/Item/EditItem/EditItemContainer";
+import { Switch} from "react-router-dom";
 
 
 
@@ -18,7 +19,7 @@ class InventoryRoutes extends React.Component {
 
     render() {
         return (
-            <>
+            <Switch>
                 {/*ITEM TYPE ROUTES*/}
                 <Route exact path={"/ItemType"} component={ItemTypeContainer}/>
                 <Route exact path={"/EditItemType"} component={EditItemTypeForm}/>
@@ -31,7 +32,7 @@ class InventoryRoutes extends React.Component {
                 <Route exact path={"/Item"} component={ShowItem}/>
                 <Route exact path={"/AddItem"} component={AddItemContainer}/>
                 <Route exact path={"/EditItem"} component={EditItemContainer}/>
-    </>
+    </Switch>
         );
     }
 

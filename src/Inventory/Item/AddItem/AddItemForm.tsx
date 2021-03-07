@@ -17,26 +17,26 @@ class AddItemForm extends Component<Props> {
         return (<Box  m={4} >
             <Grid  item  xs={12} >
                 <Form fields={[
-                    {as: Text, name: 'name', extra: {__label: 'ITEM NAME'}},
+                    {as: Text, name: 'itemName', extra: {__label: 'ITEM NAME'}},
                     {
                         as: Radio, name: 'type', extra: {
                             __label: "Type",
                             options: itemTypeRadios
                         }
                     },
-                    {as: Checkbox, name: 'isActive', extra: {__label: 'Activity'}},
-                    {
-                        as: AutoUpload, name: 'image', extra: {
-                            __label: 'Add image',
-                            uploadedFileExtractorFromResponse: (res: any) => {
-                                const json = JSON.parse(res);
-                                return Endpoints.item.image(json.url);
-                            },
-                            uploadOptions: {
-                                url: Endpoints.item.uploadImage
-                            }
-                        }
-                    }
+                    {as: Checkbox, name: 'isActive', extra: {label: 'Activity'}},
+                    // {
+                    //     as: AutoUpload, name: 'image', extra: {
+                    //         __label: 'Add image',
+                    //         uploadedFileExtractorFromResponse: (res: any) => {
+                    //             const json = JSON.parse(res);
+                    //             return Endpoints.item.image(json.url);
+                    //         },
+                    //         uploadOptions: {
+                    //             url: Endpoints.item.uploadImage
+                    //         }
+                    //     }
+                    // }
 
                 ]}
 

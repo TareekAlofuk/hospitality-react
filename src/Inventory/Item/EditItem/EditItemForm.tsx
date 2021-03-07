@@ -20,7 +20,7 @@ class EditItemForm extends Component<Props> {
         return (<Box  m={4} >
             <Grid  item  xs={12} >
                 <Form fields={[
-                    {as: Text, name: 'name', extra: {__label: 'ITEM NAME'}},
+                    {as: Text, name: 'itemName', extra: {__label: 'ITEM NAME'}},
                     {
                         as: Radio, name: 'type', extra: {
                             __label: "Type",

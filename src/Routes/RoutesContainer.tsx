@@ -1,17 +1,18 @@
 import {Component} from 'react'
 import InventoryRoutes from './InventoryRoutes'
 import SuperAdminRoutes from './SuperAdminRoutes'
-import { Switch} from "react-router-dom";
+import OrderRoutes from "./OrderRoutes";
 
 class RoutesContainer extends Component {
 
 
     render() {
         return (
-            <Switch>
+            <>
+            <InventoryRoutes/>
             <SuperAdminRoutes/>
-            <RoutesContainer/>
-            </Switch>
+            <OrderRoutes/>
+            </>
         );
     }
 

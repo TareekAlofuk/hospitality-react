@@ -1,11 +1,13 @@
 export interface IEndpoints {
     item: {
         get: string;
+        getActiveItems:string;
         add: string;
         delete: (id: string) => string;
         uploadImage:string
         edit: (id: string) => string;
         image : (name : string) => string;
+
     }
     item_type: {
         get: string;
@@ -24,6 +26,13 @@ export interface IEndpoints {
         add: string;
         delete: (id: string) => string;
         edit: (id: string) => string;
+    },
+    Order: {
+        get: string;
+        add: string;
+        delete: (id: string) => string;
+        edit: (id: string) => string;
+        UpdateStatus:(id:string)=>string
     }
 }
 
@@ -45,7 +54,8 @@ function makeEndpointWithId(route: string, id: string): string {
 export const Endpoints: IEndpoints = {
     item: {
         get: makeEndpoint("Item"),
-        add: makeEndpoint("Item/Add"),
+        getActiveItems:makeEndpoint("Item/ActiveItems"),
+        add:makeEndpoint("Item/Add"),
         delete: (id: string): string => {
             return makeEndpointWithId("Item/Delete", id)
         },
@@ -86,5 +96,19 @@ export const Endpoints: IEndpoints = {
             return makeEndpointWithId("Admin/Update", id)
         },
 
+    } ,
+
+    Order:{
+        get: makeEndpoint("Order"),
+        add: makeEndpoint("Order/Add"),
+        delete: (id: string): string => {
+            return makeEndpointWithId("Order/Delete", id)
+        },
+        edit: (id: string): string => {
+            return makeEndpointWithId("Order/Update", id)
+        },
+        UpdateStatus: (id: string): string => {
+            return makeEndpointWithId("Order/UpdateStatus", id)
+        }
     }
 }
