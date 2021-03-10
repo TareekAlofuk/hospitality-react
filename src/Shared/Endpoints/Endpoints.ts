@@ -29,7 +29,7 @@ export interface IEndpoints {
     },
     Order: {
         get: string;
-        getClientOrder: (id: string) => string;
+        getClientOrder: (id: any) => string;
         add: string;
         delete: (id: string) => string;
         edit: (id: string) => string;

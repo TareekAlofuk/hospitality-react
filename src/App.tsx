@@ -26,8 +26,9 @@ componentDidMount() {
         console.log(localStorage)
         return (
             <Grid container className="App"  style={{ direction:"rtl" , height:"100vh" }}>
-                <Grid item md={11}><RoutesContainer/></Grid>
-                <Grid item md={1}><NavigationBar/></Grid>
+                <NavigationBar/>
+
+                <RoutesContainer/>
 
 
                 {/*<Button variant={"contained"}*/}

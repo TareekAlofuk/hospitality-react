@@ -15,8 +15,8 @@ class OrderRoutes extends React.Component {
 
                 {/*ORDER ROUTES*/}
                 {/*<Route exact path={"/Admin"} component={ShowAdmins}/>*/}
-                <Route exact path={"/Order/Add"} component={AddOrderContainer}/>
-                <Route exact path={"/Order"} ><ShowOrders auth={"Inventory"} url={Endpoints.Order} /></Route>
+                <Route exact path={"/"} component={AddOrderContainer}/>
+                <Route exact path={"/Order"} ><ShowOrders auth={"Client"} getUrl={Endpoints.Order.getClientOrder(localStorage.getItem("userId"))} deleteUrl={Endpoints.Order.delete} updateUrl={Endpoints.Order.UpdateStatus} /></Route>
                 {/*<Route exact path={"/EditAdmin"} component={EditAdminForm}/>*/}
 
             </Switch>

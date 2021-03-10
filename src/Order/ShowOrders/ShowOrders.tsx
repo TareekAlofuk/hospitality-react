@@ -4,7 +4,7 @@ import axios from "axios";
 import OrdersList from "./OrdersList";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
-import {Grid} from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 
 
@@ -14,8 +14,13 @@ const styles = (theme:any) => ({
         justifyContent: "center",
         overflow:'scroll',
         backgroundColor:theme.palette.background.default,
-        height:"100vh"
+    },
+    container:{
+        backgroundColor:theme.palette.background.default,
+        height:"100%",
+        width:"100vw"
     }
+
 })
 
 enum LoadingStatus {
@@ -27,7 +32,9 @@ enum LoadingStatus {
 interface Props {
     classes: any,
     auth:string,
-    url:any
+    getUrl:any,
+    deleteUrl:any,
+    updateUrl:any
 }
 
 interface State {
@@ -44,7 +51,7 @@ class ShowOrders extends Component<Props> {
 
     getOrders = async () => {
         try {
-            const res = await axios.get(this.props.url.get);
+            const res = await axios.get(this.props.getUrl);
             this.setState({orders: res.data, status: 1})
         } catch (e) {
             this.setState({orders: {}, status: 2})
@@ -53,7 +60,7 @@ class ShowOrders extends Component<Props> {
 
     deleteOrder = async (_id: any) => {
         try {
-            await axios.delete(this.props.url.delete(_id))
+            await axios.delete(this.props.deleteUrl(_id))
             const ordersAfterDelete = this.state.orders.filter((order: any) => order._id !== _id)
             this.setState({orders: ordersAfterDelete});
         } catch (e) {
@@ -63,7 +70,7 @@ class ShowOrders extends Component<Props> {
 
     UpdateStatus = async (_id: any , newStatus:any) => {
         try {
-            await axios.patch(this.props.url.UpdateStatus(_id) , {status:newStatus});
+            await axios.patch(this.props.updateUrl(_id) , {status:newStatus});
             const orders = this.state.orders.map((order:any)=> {
                 if(order._id === _id){
                     order.status = newStatus
@@ -88,9 +95,11 @@ class ShowOrders extends Component<Props> {
             return <CircularProgress/>
         } else if (status === 1) {
             return (
-                <Grid container className={classes.root}>
-                    <OrdersList orders={orders} deleteOrder={this.deleteOrder} auth={auth} UpdateStatus={this.UpdateStatus}/>
+                <Box className={classes.container}>
+                <Grid container className={classes.root} >
+                        <OrdersList orders={orders} deleteOrder={this.deleteOrder} auth={auth} UpdateStatus={this.UpdateStatus}/>
                 </Grid>
+                </Box>
             );
         } else {
             return <Alert severity="error">there is an error !</Alert>
