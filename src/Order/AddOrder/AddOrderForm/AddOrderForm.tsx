@@ -16,31 +16,34 @@ interface Props {
 }
 
 interface metaData {
-    clientName: string,
-    roomName: string,
-    isGust: boolean
-    note: string
+    clientName: any,
+    roomName: any,
+    isGust: boolean,
+    note: string,
+    userId:any
 }
 
 const styles = () => ({
     root: {
-        backgroundColor: "#f1f1f1",
-        height: "70vh",
-        overflow: 'scroll',
+        height: "100vh",
         padding: '16px'
+    },
+    input: {
+        width: "100%",
     }
 });
 
 class AddOrderForm extends Component<Props> {
     state = {
         metadata: {
-            clientName: "",
-            roomName: "",
+            clientName: localStorage.getItem("clientName"),
+            roomName: localStorage.getItem("roomName"),
             isGust: false,
-            note: ""
+            note: "",
+            userId:localStorage.getItem('userId')
         },
-        postStatus: null ,
-        room:[]
+        postStatus: null,
+        room: []
     }
 
 
@@ -56,15 +59,14 @@ class AddOrderForm extends Component<Props> {
     }
 
     isGustHandler = (event: any) => {
-        this.setState({metadata: {...this.state.metadata , isGust: event.target.checked}});
+        this.setState({metadata: {...this.state.metadata, isGust: event.target.checked}});
     }
 
 
     clearTheForm = () => {
         this.setState({
             metadata: {
-                clientName: "",
-                roomName: "",
+                ...this.state.metadata,
                 isGust: false,
                 note: ""
             },
@@ -72,23 +74,24 @@ class AddOrderForm extends Component<Props> {
     }
 
 
-    postOrder = (cart: any[], metaData: metaData) => {
+    postOrder = async(cart: any[], metaData: metaData) => {
 
-        axios.post(Endpoints.Order.add, {
+        await axios.post(Endpoints.Order.add, {
             items: cart,
             client: {
                 clientName: metaData.clientName,
                 roomName: metaData.roomName,
             },
             note: metaData.note,
-            isGust: metaData.isGust
+            isGust: metaData.isGust,
+            userId:metaData.userId
         })
     }
     getRoom = async () => {
-        try{
-            const res  = await  axios.get(Endpoints.room.get)
-            this.setState({room:res.data})
-        }catch (e){
+        try {
+            const res = await axios.get(Endpoints.room.get)
+            this.setState({room: res.data})
+        } catch (e) {
             alert("Can not load room names")
         }
 
@@ -103,7 +106,7 @@ class AddOrderForm extends Component<Props> {
             return cart[key]
         });
 
-        if (cartInArray.length > 0){
+        if (cartInArray.length > 0) {
 
             try {
                 await this.postOrder(cartInArray, metadata);
@@ -114,12 +117,13 @@ class AddOrderForm extends Component<Props> {
                 this.setState({postStatus: false})
                 console.log("there is an error " + e)
             }
-        }else {
+        } else {
             alert("Add at lest one item")
         }
 
 
     }
+
     componentDidMount() {
         this.getRoom()
     }
@@ -140,9 +144,12 @@ class AddOrderForm extends Component<Props> {
                         removeAllCart={this.props.removeAllCart}
                     />
                 </Box>
+
+
                 <ValidatorForm onSubmit={this.onSubmitOrder} onError={errors => console.log(errors)}>
                     <TextValidator
-                        label="your name"
+                        className={classes.input}
+                        label="الاسم"
                         onChange={this.clientNameHandler}
                         name="clientName"
                         value={this.state.metadata.clientName}
@@ -152,6 +159,7 @@ class AddOrderForm extends Component<Props> {
 
 
                     <TextValidator
+                        className={classes.input}
                         name="roomName"
                         label="اسم الغرفة"
                         select
@@ -160,7 +168,7 @@ class AddOrderForm extends Component<Props> {
                         validators={['required']}
                         errorMessages={['this field is required']}
                     >
-                        {this.state.room.map((room:any) => (
+                        {this.state.room.map((room: any) => (
                             <MenuItem key={room._id} value={room.name}>
                                 {room.name}
                             </MenuItem>
@@ -168,23 +176,33 @@ class AddOrderForm extends Component<Props> {
                     </TextValidator>
 
                     <TextValidator
+                        className={classes.input}
                         name={"note"}
-                        label="write your note"
+                        label="ملاحضات"
                         onChange={this.noteHandler}
                         value={this.state.metadata.note}/>
-
                     <FormControlLabel
+                        className={classes.input}
+
                         control={
                             <Checkbox
                                 checked={this.state.metadata.isGust}
+                                color={"primary"}
                                 onChange={this.isGustHandler}
                                 name="isGust"
                             />
                         }
-                        label="Gust"
+                        label="زائر"
                     /><br/>
 
-                    <Button variant="contained" type="submit" value="Submit">send order</Button>
+                    <Button className={classes.input}
+                            variant="contained"
+                            type="submit"
+                            value="Submit"
+                            color={"primary"}
+                    >
+                        ارسال
+                    </Button>
                 </ValidatorForm>
             </Box>
 

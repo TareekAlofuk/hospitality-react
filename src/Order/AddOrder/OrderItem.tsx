@@ -1,11 +1,14 @@
 import {Component} from "react";
-import {Box, Button, CardMedia, Grid, Typography} from "@material-ui/core";
+import {Box, Button, CardMedia, Grid, IconButton, Typography} from "@material-ui/core";
 import Popover from '@material-ui/core/Popover';
 import {withStyles} from "@material-ui/core/styles";
+import MinimizeIcon from "@material-ui/icons/Minimize";
+import AddIcon from "@material-ui/icons/Add";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 interface Props {
     item: {
-        name: any,
+        itemName: any,
         type: any,
         image: any,
         count?: any
@@ -17,10 +20,17 @@ interface Props {
     classes: any
 }
 
-const styles = () => ({
-    root: {},
-    popOver: {
-        padding: "5px"
+const styles = (theme:any) => ({
+    root:{
+      margin:theme.spacing(2)
+    },
+    item:{
+        backgroundColor:"#fff",
+        height:'20vh',
+        padding:theme.spacing(2)
+    } ,
+    itemName:{
+        fontSize:"14px"
     }
 });
 
@@ -70,17 +80,24 @@ class OrderItem extends Component<Props> {
             <Grid item md={3} className={classes.root}>
 
                 <Button
-                    variant="contained"
+                    className={classes.item}
+                    variant="text"
                     onClick={this.addItemToCart}
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
-                    startIcon={<CardMedia component="img"
-                                          image={item.image}
-                                          title={item.name}
-                                          height="180"
-                    />
-                    }
                 >
+                    <Grid container  justify={"center"}>
+                        <Grid item md={12}>
+                        <CardMedia component="img"
+                                   image={item.image}
+                                   title={item.itemName}
+                        />
+                        </Grid>
+                        <Grid item md={12} >
+                        <Typography  component={"h6"} variant={"h6"} >{item.itemName}</Typography>
+                        </Grid>
+
+                    </Grid>
 
                 </Button>
 
@@ -98,29 +115,47 @@ class OrderItem extends Component<Props> {
                         horizontal: 'center',
                     }}
                 >
-                    <Box className={classes.popOver}>
-                        <Typography>name:{this.props.item.name}</Typography>
-                        <Typography>count:{this.props.count}</Typography>
+                    <Grid item container justify={"center"} alignItems={"center"} >
+                        <Grid item md={12}>
+                            <Typography variant={"h5"} align={"center"}>
+                                {this.props.item.itemName}
+                            </Typography>
+                        </Grid>
+                        <Grid md={12}>
+                            <Box>
+                                <Typography className={classes.count} variant={"h5"} align={"center"}>
+                                    {this.props.count}
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item container justify={"center"} md={12}>
+                            <Grid item md={2}>
+                                <IconButton
+                                    onClick={this.removeItemFromCart}
+                                >
+                                    <MinimizeIcon/>
+                                </IconButton>
+                            </Grid>
 
-                        <Button
-                            variant={"contained"}
-                            onClick={this.removeItemFromCart}
-                        >
-                            -
-                        </Button>
-                        <Button
-                            variant={"contained"}
-                            onClick={this.addItemToCart}
-                        >
-                            +
-                        </Button>
-                        <Button
-                            variant={"contained"}
-                            onClick={this.removeAllItemFromCart}
-                        >
-                            clear
-                        </Button>
-                    </Box>
+                            <Grid item md={2}>
+                                <IconButton
+                                    onClick={this.addItemToCart}
+                                >
+                                    <AddIcon/>
+                                </IconButton>
+                            </Grid>
+
+                            <Grid item md={2}>
+                                <IconButton
+                                    onClick={this.removeAllItemFromCart}
+                                    color={"secondary"}
+                                >
+                                    <DeleteOutlineIcon/>
+                                </IconButton>
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
                 </Popover>
             </Grid>
         );

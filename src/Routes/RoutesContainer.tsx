@@ -2,6 +2,7 @@ import {Component} from 'react'
 import InventoryRoutes from './InventoryRoutes'
 import SuperAdminRoutes from './SuperAdminRoutes'
 import OrderRoutes from "./OrderRoutes";
+import LoginRoutes from "./LoginRoutes";
 
 class RoutesContainer extends Component {
 
@@ -12,6 +13,7 @@ class RoutesContainer extends Component {
             <InventoryRoutes/>
             <SuperAdminRoutes/>
             <OrderRoutes/>
+            <LoginRoutes/>
             </>
         );
     }

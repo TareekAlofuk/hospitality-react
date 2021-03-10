@@ -4,10 +4,10 @@ import {withStyles} from "@material-ui/core/styles";
 import OrderItem from "./OrderItem";
 
 
-const styles = () => ({
+const styles = (theme:any) => ({
     root: {
-        backgroundColor: "#f1f1f1",
-        height: "90vh",
+        backgroundColor:theme.palette.background.default,
+        height: "100vh",
         overflow: 'scroll',
         padding: '16px'
     }

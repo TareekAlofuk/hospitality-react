@@ -29,6 +29,7 @@ export interface IEndpoints {
     },
     Order: {
         get: string;
+        getClientOrder: (id: string) => string;
         add: string;
         delete: (id: string) => string;
         edit: (id: string) => string;
@@ -100,6 +101,9 @@ export const Endpoints: IEndpoints = {
 
     Order:{
         get: makeEndpoint("Order"),
+        getClientOrder:(userId: string): string => {
+            return makeEndpointWithId("Order/showClientOrders", userId)
+        },
         add: makeEndpoint("Order/Add"),
         delete: (id: string): string => {
             return makeEndpointWithId("Order/Delete", id)

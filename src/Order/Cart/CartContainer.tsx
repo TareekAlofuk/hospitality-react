@@ -1,11 +1,16 @@
 import {Component} from "react";
-import {Box, Button, Grid} from "@material-ui/core";
+import {Box, IconButton, Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import CartItem from "./CartItem";
+import ClearIcon from '@material-ui/icons/Clear';
 
-
-const styles = () => ({
-    root: {}
+const styles = (theme: any) => ({
+    root: {
+        height: "60vh",
+        overflow: "scroll",
+        backgroundColor: theme.palette.background.paper
+    },
+    clearButton: {}
 });
 
 interface Props {
@@ -33,19 +38,22 @@ class CartContainer extends Component<Props> {
 
         return (
             <Box className={classes.root}>
-                <Grid container>
+
+                {
+                    disable ?
+                        <></> :
+                        <IconButton onClick={this.props.removeAllCart} color={"secondary"}>
+                            <ClearIcon/>
+                        </IconButton>
+                }
+                <Grid container alignItems={"center"}>
                     {cartKeys.map(key => {
                         return <CartItem item={cart[key]} key={key} removeItemFromCart={this.props.removeItemFromCart}
                                          addItemToCart={this.props.addItemToCart}
                                          removeAllItemFromCart={this.props.removeAllItemFromCart}/>
                     })}
                 </Grid>
-                {
 
-                    <Button disabled={disable} onClick={this.props.removeAllCart} variant={"contained"}>
-                        Clear
-                    </Button>
-                }
             </Box>
         );
     }

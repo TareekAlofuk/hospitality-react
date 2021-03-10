@@ -9,7 +9,7 @@ import {removeItemFromCart} from "../../Store/Action/Actions";
 import {removeAllItemFromCart} from "../../Store/Action/Actions";
 import {removeAllCart} from "../../Store/Action/Actions";
 import AddOrderForm from "./AddOrderForm/AddOrderForm";
-
+import {withStyles} from "@material-ui/core";
 
 const mapStateToProps = (store: any) => {
     return {
@@ -26,9 +26,21 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 const connector = connect(mapStateToProps, mapDispatchToProps)
-type Props = ConnectedProps<typeof connector>
+type ReduxProps = ConnectedProps<typeof connector>
 
-class AddOrderContainer extends Component<Props> {
+interface Props {
+    classes?:any
+}
+
+
+const styles = () => ({
+    root: {
+        padding:"0"
+    },
+
+});
+
+class AddOrderContainer extends Component<ReduxProps & Props> {
     state = {
         activeItems: [],
         loadItemsStatus: 'Loading'
@@ -50,12 +62,12 @@ class AddOrderContainer extends Component<Props> {
     }
 
     render() {
+        const {classes} = this.props
         if (this.state.loadItemsStatus === 'Loading') {
             return <h1>Loading</h1>
         } else if (this.state.loadItemsStatus === 'Success') {
             return (
-                <Box>
-                    <Grid container spacing={3} justify={"center"} alignItems={'center'}>
+                    <Grid container  justify={"center"} alignItems={'center'} className={classes.root}>
                         <Grid item md={4}>
                             <AddOrderForm cart={this.props.cart} removeItemFromCart={this.props.removeItemFromCart}
                                           addItemToCart={this.props.addItemToCart}
@@ -70,7 +82,6 @@ class AddOrderContainer extends Component<Props> {
                         </Grid>
 
                     </Grid>
-                </Box>
             );
         } else {
             return <h1>Error</h1>
@@ -78,4 +89,4 @@ class AddOrderContainer extends Component<Props> {
     }
 }
 
-export default connector(AddOrderContainer)
+export default withStyles(styles)(connector(AddOrderContainer))

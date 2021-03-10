@@ -13,7 +13,6 @@ class AddItemForm extends Component<Props> {
 
     render() {
         const itemTypeRadios = this.props.itemTypeRadios
-        console.log(itemTypeRadios)
         return (<Box  m={4} >
             <Grid  item  xs={12} >
                 <Form fields={[

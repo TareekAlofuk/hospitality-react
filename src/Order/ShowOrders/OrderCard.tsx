@@ -10,13 +10,11 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const styles = (theme: any) => ({
     root: {
-        height: "auto",
         backgroundColor: "#fff",
         marginBottom: "3vh",
         padding: "2vh",
         borderRadius: "10px",
         boxShadow: "0px 6px 13px -1px rgba(0,0,0,0.05);",
-
         "& > *": {
             marginBottom: "1vh"
         }

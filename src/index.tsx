@@ -12,11 +12,9 @@ import Store from "./Store/Store";
 
 setupRafMaterial();
 const  them = createMuiTheme({
-    palette:{
-
-    }
-
+    direction: 'rtl'
 })
+
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={Store}>

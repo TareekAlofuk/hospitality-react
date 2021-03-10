@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import axios from "axios";
-import {Endpoints} from "../../Shared/Endpoints/Endpoints";
+// import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import OrdersList from "./OrdersList";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
@@ -8,10 +8,13 @@ import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 
 
-const styles = () => ({
+const styles = (theme:any) => ({
     root: {
         paddingTop: "8vh",
-        justifyContent: "center"
+        justifyContent: "center",
+        overflow:'scroll',
+        backgroundColor:theme.palette.background.default,
+        height:"100vh"
     }
 })
 
@@ -90,7 +93,7 @@ class ShowOrders extends Component<Props> {
                 </Grid>
             );
         } else {
-            return <Alert severity="error">This is an error alert — check it out!</Alert>
+            return <Alert severity="error">there is an error !</Alert>
         }
 
     }
