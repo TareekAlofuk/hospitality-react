@@ -1,49 +1,60 @@
 import RoutesContainer from "./Routes/RoutesContainer";
-import {Component } from "react";
+import {Component} from "react";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {Button, Grid} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import NavigationBar from "./NavigationBar/NavigationBar";
-
+import axios from "axios";
+import {connect} from "react-redux";
 
 interface Props extends RouteComponentProps<any> {
-    history:any
+    history: any,
+    dispatch: any
 }
 
-class  App extends Component<Props> {
 
-    isClient = () => {
-        if(!(localStorage.getItem("clientName")) || !(localStorage.getItem("roomName")) || !(localStorage.getItem("userId")) ) {
-            this.props.history.push('/LoginAsClient')
+axios.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('jwt') ? localStorage.getItem('jwt') : null
+    config.headers.authorization = token;
+    return config;
+}, function (error) {
+    // Do something with request error
+    return Promise.reject(error);
+});
+
+class App extends Component<Props> {
+
+    LoginStatus = () => {
+        if (!(localStorage.getItem("clientName")) || !(localStorage.getItem("roomName")) || !(localStorage.getItem("userId"))) {
+            // this.props.history.push('/LoginAsClient')
+        } else {
+
         }
     }
 
 
-componentDidMount() {
-    this.isClient()
-}
+    isAdmin = () => {
+        if (1 !== 1) {
+            // this.props.history.push('/LoginAsClient')
+        } else {
+
+        }
+    }
+
+
+    componentDidMount() {
+        this.LoginStatus()
+    }
 
     render() {
-        console.log(localStorage)
         return (
-            <Grid container className="App"  style={{ direction:"rtl" , height:"100vh" }}>
-                <NavigationBar/>
-
+            <Grid container className="App" style={{direction: "rtl", height: "100vh"}}>
+                {localStorage.getItem("permissions") === null ? " " : <NavigationBar/>}
                 <RoutesContainer/>
-
-
-                {/*<Button variant={"contained"}*/}
-                {/*     onClick={()=>{*/}
-                {/*    localStorage.removeItem('clientName')*/}
-                {/*    localStorage.removeItem('roomName')*/}
-                {/*         this.isClient()*/}
-
-                {/*     }}>sign out </Button>*/}
             </Grid>
         );
     }
 
 
-
 }
 
-export default withRouter(App);
+export default connect()(withRouter(App));

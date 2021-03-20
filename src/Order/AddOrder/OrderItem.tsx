@@ -121,14 +121,14 @@ class OrderItem extends Component<Props> {
                                 {this.props.item.itemName}
                             </Typography>
                         </Grid>
-                        <Grid md={12}>
+                        <Grid item md={12}>
                             <Box>
                                 <Typography className={classes.count} variant={"h5"} align={"center"}>
                                     {this.props.count}
                                 </Typography>
                             </Box>
                         </Grid>
-                        <Grid item container justify={"center"} md={12}>
+                        <Grid item container justify={"center"} >
                             <Grid item md={2}>
                                 <IconButton
                                     onClick={this.removeItemFromCart}

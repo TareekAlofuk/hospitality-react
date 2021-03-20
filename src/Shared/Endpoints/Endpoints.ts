@@ -1,4 +1,5 @@
 export interface IEndpoints {
+    root: string;
     item: {
         get: string;
         getActiveItems:string;
@@ -24,6 +25,7 @@ export interface IEndpoints {
     admin: {
         get: string;
         add: string;
+        login:string;
         delete: (id: string) => string;
         edit: (id: string) => string;
     },
@@ -37,6 +39,9 @@ export interface IEndpoints {
     }
 }
 
+function root() {
+    return "http://127.0.0.1:3100";
+}
 function makeEndpoint(route: string): string {
     const baseUrl = "http://127.0.0.1:3100/api/";
     return `${baseUrl}${route}`
@@ -53,6 +58,7 @@ function makeEndpointWithId(route: string, id: string): string {
 }
 
 export const Endpoints: IEndpoints = {
+    root : root(),
     item: {
         get: makeEndpoint("Item"),
         getActiveItems:makeEndpoint("Item/ActiveItems"),
@@ -90,6 +96,7 @@ export const Endpoints: IEndpoints = {
     admin:{
         get: makeEndpoint("Admin"),
         add: makeEndpoint("Admin/Add"),
+        login:makeEndpoint("Admin/Login"),
         delete: (id: string): string => {
             return makeEndpointWithId("Admin/Delete", id)
         },

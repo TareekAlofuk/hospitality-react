@@ -3,7 +3,10 @@ import {REMOVE_ITEM_FROM_CART} from "../Action/Types";
 import {REMOVE_ALL_ITEM_FROM_CART} from "../Action/Types";
 import {REMOVE_ALL_CART} from "../Action/Types";
 
-export const cartReducers = (state: any, action: any) => {
+const initialState = {
+    cart:{}
+}
+export const cartReducers = (state: any = initialState, action: any) => {
 
     switch (action.type) {
         case ADD_ITEM_TO_CART: {

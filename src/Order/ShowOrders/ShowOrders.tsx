@@ -1,24 +1,24 @@
 import {Component} from 'react'
 import axios from "axios";
-// import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import OrdersList from "./OrdersList";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import {Box, Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
+import SocketIO from "socket.io-client";
+import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 
-
-const styles = (theme:any) => ({
+const styles = (theme: any) => ({
     root: {
         paddingTop: "8vh",
         justifyContent: "center",
-        overflow:'scroll',
-        backgroundColor:theme.palette.background.default,
+        overflow: 'scroll',
+        backgroundColor: theme.palette.background.default,
     },
-    container:{
-        backgroundColor:theme.palette.background.default,
-        height:"100%",
-        width:"100vw"
+    container: {
+        backgroundColor: theme.palette.background.default,
+        // height: "100%",
+        width: "100vw"
     }
 
 })
@@ -31,16 +31,17 @@ enum LoadingStatus {
 
 interface Props {
     classes: any,
-    auth:string,
-    getUrl:any,
-    deleteUrl:any,
-    updateUrl:any
+    auth: string,
+    getUrl: any,
+    deleteUrl: any,
+    updateUrl: any
 }
 
 interface State {
     status: LoadingStatus,
     orders: any
 }
+
 
 class ShowOrders extends Component<Props> {
 
@@ -49,11 +50,28 @@ class ShowOrders extends Component<Props> {
         orders: null
     }
 
+    private socket: SocketIOClient.Socket | null = null;
+
     getOrders = async () => {
         try {
             const res = await axios.get(this.props.getUrl);
-            this.setState({orders: res.data, status: 1})
+            this.setState({orders: res.data, status: 1});
+            this.socket = SocketIO(Endpoints.root);
+
+            this.socket.on('NEW_ORDER', (data: any) => {
+                console.log(res.data);
+                const orders = [data, ...this.state.orders];
+                this.setState({orders: orders});
+                console.log(data);
+            });
+
+
+            this.socket.on('ORDER_STATUS_UPDATED', (data: any) => {
+
+            });
+
         } catch (e) {
+            console.log(e);
             this.setState({orders: {}, status: 2})
         }
     }
@@ -68,17 +86,17 @@ class ShowOrders extends Component<Props> {
         }
     }
 
-    UpdateStatus = async (_id: any , newStatus:any) => {
+    UpdateStatus = async (_id: any, newStatus: any) => {
         try {
-            await axios.patch(this.props.updateUrl(_id) , {status:newStatus});
-            const orders = this.state.orders.map((order:any)=> {
-                if(order._id === _id){
+            await axios.patch(this.props.updateUrl(_id), {status: newStatus});
+            const orders = this.state.orders.map((order: any) => {
+                if (order._id === _id) {
                     order.status = newStatus
                 }
                 return order
             })
 
-            this.setState({orders: orders });
+            this.setState({orders: orders});
         } catch (e) {
             alert("حدث هنالك خطآ ما ")
         }
@@ -88,17 +106,24 @@ class ShowOrders extends Component<Props> {
         await this.getOrders()
     }
 
+    componentWillUnmount() {
+        if (this.socket) {
+            this.socket.close();
+        }
+    }
+
     render() {
-        const {orders, status } = this.state
-        const {classes , auth} = this.props;
+        const {orders, status} = this.state
+        const {classes, auth} = this.props;
         if (status === 0) {
             return <CircularProgress/>
         } else if (status === 1) {
             return (
                 <Box className={classes.container}>
-                <Grid container className={classes.root} >
-                        <OrdersList orders={orders} deleteOrder={this.deleteOrder} auth={auth} UpdateStatus={this.UpdateStatus}/>
-                </Grid>
+                    <Grid container className={classes.root}>
+                        <OrdersList orders={orders} deleteOrder={this.deleteOrder} auth={auth}
+                                    UpdateStatus={this.UpdateStatus}/>
+                    </Grid>
                 </Box>
             );
         } else {

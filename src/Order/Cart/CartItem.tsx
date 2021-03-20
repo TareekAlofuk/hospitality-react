@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {Box, Button, Grid, ButtonGroup, IconButton, Typography} from "@material-ui/core";
+import {Box, Grid, IconButton, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import MinimizeIcon from '@material-ui/icons/Minimize';
@@ -49,14 +49,14 @@ class CartItem extends Component<Props> {
                         {itemName}
                     </Typography>
                 </Grid>
-                <Grid md={12}>
+                <Grid item md={12}>
                     <Box>
                         <Typography className={classes.count} variant={"h5"} align={"center"}>
                             {count}
                         </Typography>
                     </Box>
                 </Grid>
-                <Grid item container justify={"center"} md={12}>
+                <Grid item container justify={"center"} >
                     <Grid item md={2}>
                         <IconButton
                             onClick={this.removeItemFromCart}

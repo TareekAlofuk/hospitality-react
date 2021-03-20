@@ -1,14 +1,14 @@
 import React from "react";
 import {Route} from "react-router-dom";
-import ItemTypeContainer from "../Inventory/ItemType/ShowItemType/ItemTypeContainer";
-import EditItemTypeForm from "../Inventory/ItemType/EditItemType/EditItemTypeForm";
-import AddItemTypeForm from "../Inventory/ItemType/AddItemType/AddItemTypeForm";
-import AddRoomForm from "../Inventory/Room/AddRoom/AddRoomForm";
-import RoomContainer from "../Inventory/Room/ShowRoom/RoomContainer";
-import EditRoomForm from "../Inventory/Room/EditRoom/EditRoomForm";
-import ShowItem from "../Inventory/Item/ShowItem/ShowItem";
-import AddItemContainer from "../Inventory/Item/AddItem/AddItemContainer";
-import EditItemContainer from "../Inventory/Item/EditItem/EditItemContainer";
+import ItemTypeContainer from "../ItemType/ShowItemType/ItemTypeContainer";
+import EditItemTypeForm from "../ItemType/EditItemType/EditItemTypeForm";
+import AddItemTypeForm from "../ItemType/AddItemType/AddItemTypeForm";
+import AddRoomForm from "../Room/AddRoom/AddRoomForm";
+import RoomContainer from "../Room/ShowRoom/RoomContainer";
+import EditRoomForm from "../Room/EditRoom/EditRoomForm";
+import ShowItem from "../Item/ShowItem/ShowItem";
+import AddItemContainer from "../Item/AddItem/AddItemContainer";
+import EditItemContainer from "../Item/EditItem/EditItemContainer";
 import { Switch} from "react-router-dom";
 
 

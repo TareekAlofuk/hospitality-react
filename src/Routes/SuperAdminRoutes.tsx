@@ -1,10 +1,9 @@
 import React from "react";
 import {Route} from "react-router-dom";
-
-import AddAdminForm from "../SuperAdmin/Admin/AddAdmin/AddAdminForm";
-import EditAdminForm from "../SuperAdmin/Admin/EditItem/EditAdminForm";
-import ShowAdmins from "../SuperAdmin/Admin/ShowAdmins/ShowAdmins";
-import { Switch} from "react-router-dom";
+import AddAdminForm from "../Admin/AddAdmin/AddAdminForm";
+import EditAdminForm from "../Admin/EditItem/EditAdminForm";
+import ShowAdmins from "../Admin/ShowAdmins/ShowAdmins";
+import {Switch} from "react-router-dom";
 
 
 class SuperAdminRoutes extends React.Component {

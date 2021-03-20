@@ -34,7 +34,7 @@ class CartContainer extends Component<Props> {
         const {classes}: any = this.props;
         const cartKeys = Object.keys(cart);
 
-        const disable = Object.keys(cart).length === 0;
+        const disable = cartKeys.length === 0;
 
         return (
             <Box className={classes.root}>

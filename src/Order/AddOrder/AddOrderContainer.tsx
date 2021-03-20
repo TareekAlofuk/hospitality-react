@@ -1,19 +1,19 @@
 import {Component} from "react";
-import {Box, Grid} from "@material-ui/core";
+import { Grid} from "@material-ui/core";
 import AddOrderItems from "./AddOrderItems";
 import {connect, ConnectedProps} from 'react-redux'
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import Axios from "axios";
-import {addItemToCart} from "../../Store/Action/Actions";
-import {removeItemFromCart} from "../../Store/Action/Actions";
-import {removeAllItemFromCart} from "../../Store/Action/Actions";
-import {removeAllCart} from "../../Store/Action/Actions";
-import AddOrderForm from "./AddOrderForm/AddOrderForm";
+import {addItemToCart} from "../../Store/Action/CartActions";
+import {removeItemFromCart} from "../../Store/Action/CartActions";
+import {removeAllItemFromCart} from "../../Store/Action/CartActions";
+import {removeAllCart} from "../../Store/Action/CartActions";
 import {withStyles} from "@material-ui/core";
+import AddOrderFormContainer from "./AddOrderForm/AddOrderFormContainer";
 
 const mapStateToProps = (store: any) => {
     return {
-        cart: store.cart
+        cart: store.cartReducers.cart
     }
 }
 
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch: any) => {
         addItemToCart: (item: any) => dispatch(addItemToCart(item)),
         removeItemFromCart: (item: any) => dispatch(removeItemFromCart(item)),
         removeAllItemFromCart: (item: any) => dispatch(removeAllItemFromCart(item)),
-        removeAllCart: (item: any) => dispatch(removeAllCart(item))
+        removeAllCart: () => dispatch(removeAllCart())
     }
 }
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -50,7 +50,6 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
         try {
             const response = await Axios.get(apiUrl);
             this.setState({activeItems: response.data, loadItemsStatus: 'Success'})
-            console.log(response)
 
         } catch (e) {
             this.setState({activeItems: [], loadItemsStatus: 'Failed'})
@@ -69,7 +68,7 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
             return (
                     <Grid container  justify={"center"} alignItems={'center'} className={classes.root}>
                         <Grid item md={4}>
-                            <AddOrderForm cart={this.props.cart} removeItemFromCart={this.props.removeItemFromCart}
+                            <AddOrderFormContainer cart={this.props.cart} removeItemFromCart={this.props.removeItemFromCart}
                                           addItemToCart={this.props.addItemToCart}
                                           removeAllItemFromCart={this.props.removeAllItemFromCart}
                                           removeAllCart={this.props.removeAllCart}/>

@@ -15,6 +15,7 @@ const styles = (theme: any) => ({
         padding: "2vh",
         borderRadius: "10px",
         boxShadow: "0px 6px 13px -1px rgba(0,0,0,0.05);",
+        width:'55vw',
         "& > *": {
             marginBottom: "1vh"
         }
@@ -62,13 +63,13 @@ class OrderCard extends Component<Props> {
 
 
         return (
-            <Grid container md={7} item className={`${isGuestStyle} ${classes.root}  `}>
-                <Grid item container alignItems="center" md={12}>
+            <Grid container  item className={`${isGuestStyle} ${classes.root}  `}>
+                <Grid item container alignItems="center"  >
                     <Grid item><PersonOutlineOutlinedIcon fontSize={"large"} color={'primary'}/></Grid>
                     <Grid item className={classes.text}>{order.client.clientName}</Grid>
                 </Grid>
 
-                <Grid item container className={classes.roomName} alignItems="center" md={12}>
+                <Grid item container className={classes.roomName} alignItems="center" >
                     <Grid item><RoomOutlinedIcon fontSize={"default"} color={'primary'}/></Grid>
                     <Grid item className={classes.text}>{order.client.roomName}</Grid>
                 </Grid>
@@ -79,7 +80,7 @@ class OrderCard extends Component<Props> {
                             return <Grid container key={item._id}>
 
                                 <Grid item container className={classes.itemCount} md={1}>
-                                    <Grid item>
+                                    <Grid item >
                                         {item.count}
                                     </Grid>
                                 </Grid>
@@ -93,7 +94,7 @@ class OrderCard extends Component<Props> {
                 </Grid>
 
                 {order.note &&
-                <Grid item container alignItems="center" md={12}>
+                <Grid item container alignItems="center" >
                     <Grid item><NoteIcon fontSize={"default"} color={'primary'}/></Grid>
                     <Grid item md={4} className={classes.text}> {order.note}</Grid>
                 </Grid>
@@ -101,34 +102,34 @@ class OrderCard extends Component<Props> {
 
                 {
                     order.status === 0 &&
-                    <Grid item container alignItems="center" md={12}>
+                    <Grid item container alignItems="center" >
                         <Grid item><DoneIcon color={"disabled"}/></Grid>
                         <Grid item className={classes.text}>قيد الانتضار </Grid>
                     </Grid>
                 }
                 {
                     order.status === 1 &&
-                    <Grid item container alignItems="center" md={12}>
+                    <Grid item container alignItems="center" >
                         <Grid item><DoneAllIcon color={"disabled"}/></Grid>
                         <Grid item className={classes.text}> قيد العمل</Grid>
                     </Grid>
                 }
                 {
                     order.status === 2 &&
-                    <Grid item container alignItems="center" md={12}>
+                    <Grid item container alignItems="center" >
                         <Grid item><DoneAllIcon color={"primary"}/></Grid>
                         <Grid item className={classes.text}>مكتمل</Grid>
                     </Grid>
                 }
                 {
                     order.isGust &&
-                    <Grid item container alignItems="center" md={12}>
+                    <Grid item container alignItems="center">
                         <Grid item><FavoriteIcon color={"secondary"}/></Grid>
                         <Grid item className={classes.text}>هنالك زائر</Grid>
                     </Grid>
                 }
                 {
-                    order.status === 0 && auth === 'Client' &&
+                    order.status === 0 && auth === 'client' &&
                     <Grid item md={12}>
                         <Button
                             color="primary"
@@ -143,7 +144,7 @@ class OrderCard extends Component<Props> {
                 }
 
                 {
-                    auth === 'Inventory' &&
+                    auth === 'operations' &&
                     <Grid item md={12}>
 
                         {
