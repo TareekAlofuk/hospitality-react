@@ -5,6 +5,7 @@ import {Grid} from "@material-ui/core";
 import NavigationBar from "./NavigationBar/NavigationBar";
 import axios from "axios";
 import {connect} from "react-redux";
+import MainLoginPage from "./Login/MainLoginPage";
 
 interface Props extends RouteComponentProps<any> {
     history: any,
@@ -21,34 +22,24 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 
+
 class App extends Component<Props> {
-
-    LoginStatus = () => {
-        if (!(localStorage.getItem("clientName")) || !(localStorage.getItem("roomName")) || !(localStorage.getItem("userId"))) {
-            // this.props.history.push('/LoginAsClient')
-        } else {
-
+    isLogin = () => {
+        if (!localStorage.getItem("permissions")) {
+            this.props.history.push('/loginChooses')
         }
     }
-
-
-    isAdmin = () => {
-        if (1 !== 1) {
-            // this.props.history.push('/LoginAsClient')
-        } else {
-
-        }
-    }
-
 
     componentDidMount() {
-        this.LoginStatus()
+        this.isLogin()
     }
 
     render() {
         return (
             <Grid container className="App" style={{direction: "rtl", height: "100vh"}}>
-                {localStorage.getItem("permissions") === null ? " " : <NavigationBar/>}
+                {(localStorage.getItem("permissions")) ?
+                    <NavigationBar/> : ""}
+
                 <RoutesContainer/>
             </Grid>
         );
