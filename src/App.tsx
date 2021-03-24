@@ -5,7 +5,6 @@ import {Grid} from "@material-ui/core";
 import NavigationBar from "./NavigationBar/NavigationBar";
 import axios from "axios";
 import {connect} from "react-redux";
-import MainLoginPage from "./Login/MainLoginPage";
 
 interface Props extends RouteComponentProps<any> {
     history: any,
@@ -36,7 +35,7 @@ class App extends Component<Props> {
 
     render() {
         return (
-            <Grid container className="App" style={{direction: "rtl", height: "100vh"}}>
+            <Grid container className="App" style={{direction: "rtl", height: "100vh"}} justify={"center"} >
                 {(localStorage.getItem("permissions")) ?
                     <NavigationBar/> : ""}
 

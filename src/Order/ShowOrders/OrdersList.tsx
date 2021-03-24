@@ -12,7 +12,7 @@ class OrdersList extends Component<Props> {
 
     render(): any {
         const  {orders , deleteOrder , auth , UpdateStatus} = this.props
-        return orders.map((order: any) => {
+        return orders.slice(0).reverse().map((order: any) => {
             return <OrderCard order={order} deleteOrder={deleteOrder} key={order._id}  auth={auth} UpdateStatus={UpdateStatus}/>
         })
     }

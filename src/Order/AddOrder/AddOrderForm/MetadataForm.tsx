@@ -1,65 +1,60 @@
 import {Component} from "react";
-import {Button, Checkbox, FormControlLabel, MenuItem} from '@material-ui/core';
+import {Box, Button, Checkbox, FormControlLabel, MenuItem, TextField} from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import {connect, ConnectedProps} from "react-redux";
 import {setIsGuest, setName, setNote, setRoom} from "../../../Store/Action/OrderFormActions";
 import {withStyles} from "@material-ui/core/styles";
+import {Favorite, FavoriteBorder} from "@material-ui/icons";
 
 interface Props {
-    onSubmitOrder:any,
-    classes?:any,
+    onSubmitOrder: any,
+    classes?: any,
     orderMetaData: any;
-    dispatch : any;
-    room:any;
+    dispatch: any;
+    room: any;
 }
 
-const connector = connect((store:any) => {
+const connector = connect((store: any) => {
     return {
-        orderMetaData : store.orderFormReducer.metadata
+        orderMetaData: store.orderFormReducer.metadata
     }
 })
 type ReduxProps = ConnectedProps<typeof connector>
 
-const styles = () => ({
+const styles = (theme: any) => ({
     root: {
-        height: "100vh",
-        padding: '16px'
+        height:"auto"
     },
     input: {
         width: "100%",
+    },
+    button: {
+        height: theme.spacing(6),
+        width: "100%"
     }
 });
 
-class MetadataForm extends Component<Props&ReduxProps> {
-
-
+class MetadataForm extends Component<Props & ReduxProps> {
 
     clientNameHandler = (event: any) => {
-        event.preventDefault();
         this.props.dispatch(setName(event.target.value))
     }
-
     roomNameHandler = (event: any) => {
-        event.preventDefault();
         this.props.dispatch(setRoom(event.target.value))
     }
     noteHandler = (event: any) => {
-        event.preventDefault();
         this.props.dispatch(setNote(event.target.value))
     }
 
     isGustHandler = (event: any) => {
-        event.preventDefault();
-        this.props.dispatch(setIsGuest( event.target.checked))
+        this.props.dispatch(setIsGuest(event.target.checked))
     }
 
-
     render() {
-        const {classes} = this.props;
 
-        console.log(this.props.orderMetaData)
+        const {classes} = this.props;
         return (
-            <>
+            <Box className={classes.root} >
                 <ValidatorForm onSubmit={this.props.onSubmitOrder} onError={errors => console.log(errors)}>
                     <TextValidator
                         label="الاسم"
@@ -68,8 +63,11 @@ class MetadataForm extends Component<Props&ReduxProps> {
                         name="clientName"
                         value={this.props.orderMetaData.name}
                         validators={['required']}
-                        errorMessages={['this field is required']}
+                        autoComplete={"false"}
+                        errorMessages={['عذرا ... يبدو انك نسيت كتابة الاسم']}
                     />
+
+                    <br/><br/>
 
 
                     <TextValidator
@@ -80,7 +78,8 @@ class MetadataForm extends Component<Props&ReduxProps> {
                         onChange={this.roomNameHandler}
                         value={this.props.orderMetaData.roomName}
                         validators={['required']}
-                        errorMessages={['this field is required']}
+                        autoComplete={"false"}
+                        errorMessages={['عذرا ... يبدو انك نسيت اختيار الغرفة']}
                     >
                         {this.props.room.map((room: any) => (
                             <MenuItem key={room._id} value={room.name}>
@@ -89,41 +88,50 @@ class MetadataForm extends Component<Props&ReduxProps> {
                         ))}
                     </TextValidator>
 
-                    <TextValidator
+                    <br/><br/>
+
+                    <TextField
                         name={"note"}
                         className={classes.input}
                         label="ملاحضات"
                         onChange={this.noteHandler}
-                        value={this.props.orderMetaData.note}/>
+                        value={this.props.orderMetaData.note}
+                        multiline
+                        rows={4}
+                    />
+
+                    <br/><br/>
+
                     <FormControlLabel
                         className={classes.input}
                         control={
                             <Checkbox
-                                checked={this.props.orderMetaData.isGuest}
-                                color={"primary"}
+                                checked={this.props.orderMetaData.isGust}
+                                color={"secondary"}
                                 onChange={this.isGustHandler}
                                 name="isGust"
+                                icon={<FavoriteBorder/>}
+                                checkedIcon={<Favorite/>}
                             />
                         }
                         label="زائر"
                     /><br/>
 
                     <Button
-                            variant="contained"
-                            type="submit"
-                            value="Submit"
-                            color={"primary"}
+                        variant="contained"
+                        type="submit"
+                        value="Submit"
+                        color={"primary"}
+                        className={classes.button}
                     >
-                        ارسال
+                        اطلب الآن
                     </Button>
                 </ValidatorForm>
-            </>
+            </Box>
 
         );
     }
 }
 
 
-
-
-export default withStyles(styles)( connector(MetadataForm))
+export default withStyles(styles)(connector(MetadataForm))

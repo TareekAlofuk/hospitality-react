@@ -5,20 +5,31 @@ import {Box, Button, Grid} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import AxiosSubmitter from "../../AxiosSubmitter";
+import {withStyles} from "@material-ui/core";
 
+
+const styles = (theme:any)=> ({
+    buttonContainer:{
+        width:"20vw"
+    },
+
+})
 
 interface Props extends RouteComponentProps<any> {
     room: any
+    classes?:any
+
 }
 
 class EditRoomForm extends Component<Props> {
 
     render() {
+        const {classes} = this.props
         const {room}: any = this.props.location.state
-        return (<Box m={4}>
-            <Grid item xs={12}>
+        return (
+            <Grid item lg={4}>
                 <Form fields={[
-                    {as: Text, name: 'name', extra: {label: 'Room name'}}
+                    {as: Text, name: 'name', extra: {label: 'أسم الغرفة'}}
                 ]}
                       initialValues={room}
                       services={{
@@ -40,7 +51,8 @@ class EditRoomForm extends Component<Props> {
                           renderOptions: {
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
-                                                         onClick={() => form.submit()}>EDIT</Button>
+                                                         className={classes.buttonContainer}
+                                                         onClick={() => form.submit()}>تعديل</Button>
                               ],
                               actionsAlignments: "center"
                           },
@@ -48,9 +60,9 @@ class EditRoomForm extends Component<Props> {
                       }}
                 />
             </Grid>
-        </Box>);
+        );
     }
 
 }
 
-export default withRouter(EditRoomForm)
+export default withStyles(styles)(withRouter(EditRoomForm))

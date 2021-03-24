@@ -6,8 +6,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 const styles = (theme: any) => ({
     root: {
-        height: "60vh",
-        overflow: "scroll",
         backgroundColor: theme.palette.background.paper
     },
     clearButton: {}

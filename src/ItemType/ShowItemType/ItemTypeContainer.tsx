@@ -8,11 +8,26 @@ import {Link} from "react-router-dom"
 import AddIcon from '@material-ui/icons/Add';
 import AxiosReceiver from "../../AxiosReceiver";
 
-
-  class ItemTypeContainer extends React.Component {
-
+import {withStyles} from "@material-ui/core";
 
 
+const styles = (theme:any)=> ({
+    root:{
+        height:"88vh" ,
+    },
+    addButtonContainer:{
+        height:"10vh",
+    },
+    formContainer:{
+        height:"78vh",
+        overflow:"scroll"
+    }
+})
+interface Props {
+    classes?:any
+}
+
+  class ItemTypeContainer extends React.Component<Props> {
 
     onDelete = async (autoCollection: any, metadata: any, data: any) => {
         if (window.confirm('Are you sure you want to delete this item type')) {
@@ -27,35 +42,36 @@ import AxiosReceiver from "../../AxiosReceiver";
     }
 
 
-
-
     render() {
+        const {classes} = this.props
         return <Grid container spacing={2} justify="center" >
-
-            <Grid item xs={3}>
+            <Grid item lg={7}  className={classes.addButtonContainer}>
                 <Button
                     startIcon={<AddIcon />}
                     component={Link}
                     to={'./AddItemType'}
                     variant={'contained'}
                 >
-                    ADD
+                    اضافة
                 </Button>
             </Grid>
 
-            <Grid item xs={10}>
+            <Grid item lg={7} className={classes.formContainer}>
             <AutoCollection as={Table}
                             properties={{
                                 orderBy: ['name', 'actions'],
                                 extraProperties: [
-                                    {name: 'actions', title: 'Actions'}
+                                    {name: 'actions', title: ''}
                                 ],
+                                titles:{
+                                    name:'الاسم'
+                                },
                                 renderValue: {
                                     actions: (property, data, metadata, autoCollection: IAutoCollection) => {
                                         return <TableCell>
                                             <Button onClick={async () => {
                                                 await this.onDelete(autoCollection, metadata, data)
-                                            }}>DELETE</Button>
+                                            }}>حذف</Button>
                                             <Button
                                                 component={Link}
                                                 to={{
@@ -64,7 +80,7 @@ import AxiosReceiver from "../../AxiosReceiver";
                                                         {
                                                             itemType: data
                                                         }
-                                                }}>EDIT</Button>
+                                                }}>تعديل</Button>
 
                                         </TableCell>
                                     }
@@ -88,4 +104,4 @@ import AxiosReceiver from "../../AxiosReceiver";
 }
 
 
-export default ItemTypeContainer
+export default withStyles(styles)(ItemTypeContainer)

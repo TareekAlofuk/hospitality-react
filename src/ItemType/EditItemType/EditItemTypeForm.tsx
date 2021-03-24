@@ -5,21 +5,34 @@ import {Button , Grid , Box} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {withRouter , RouteComponentProps} from "react-router-dom";
 import AxiosSubmitter from "../../AxiosSubmitter";
+import {withStyles} from "@material-ui/core";
+
+
+const styles = (theme:any)=> ({
+    buttonContainer:{
+        width:"20vw"
+    },
+
+})
+
 
 
 
 
 interface Props extends RouteComponentProps<any>  {
     itemType:any
+    classes?:any
+
 }
 class EditItemTypeForm extends Component<Props> {
 
     render() {
+        const{classes} = this.props
         const {itemType}:any = this.props.location.state
-        return (<Box  m={4} >
-            <Grid  item  xs={12} >
+        return (
+            <Grid  item  lg={4} >
                 <Form fields={[
-                    {as: Text, name: 'name', extra: {label: 'Item Type'}}
+                    {as: Text, name: 'name', extra: {label: 'اسم النوع'}}
                 ]}
                       initialValues={itemType}
                       services={{
@@ -40,7 +53,8 @@ class EditItemTypeForm extends Component<Props> {
                           renderOptions: {
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
-                                                         onClick={() => form.submit()}>EDIT</Button>
+                                                         className={classes.buttonContainer}
+                                                         onClick={() => form.submit()}>تعديل</Button>
                               ],
                               actionsAlignments: "center"
                           },
@@ -48,9 +62,9 @@ class EditItemTypeForm extends Component<Props> {
                       }}
                 />
             </Grid>
-        </Box>        );
+           );
     }
 
 }
 
-export default  withRouter(EditItemTypeForm)
+export default withStyles(styles)(withRouter(EditItemTypeForm))

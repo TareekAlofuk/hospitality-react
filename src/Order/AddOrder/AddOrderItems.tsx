@@ -6,8 +6,8 @@ import OrderItem from "./OrderItem";
 
 const styles = (theme:any) => ({
     root: {
-        backgroundColor:theme.palette.background.default,
-        height: "100vh",
+        backgroundColor:theme.palette.grey[50],
+        height: "90vh",
         overflow: 'scroll',
         padding: '16px'
     }

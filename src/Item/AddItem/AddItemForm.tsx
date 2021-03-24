@@ -5,28 +5,40 @@ import {Box, Button , Grid} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import AxiosSubmitter from "../../AxiosSubmitter";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {withStyles} from "@material-ui/core";
+
+
+const styles = (theme:any)=> ({
+    ButtonContainer:{
+        width:"20vw"
+    },
+
+})
+
 
 
 interface Props extends RouteComponentProps<any> {
     itemTypeRadios: any
+    classes?:any
 }
 
 
 class AddItemForm extends Component<Props> {
 
     render() {
+        const {classes} = this.props
         const itemTypeRadios = this.props.itemTypeRadios
-        return (<Box  m={4} >
-            <Grid  item  xs={12} >
+        return (
+            <Grid  item  lg={4} >
                 <Form fields={[
-                    {as: Text, name: 'itemName', extra: {__label: 'ITEM NAME'}},
+                    {as: Text, name: 'itemName', extra: {label: 'اسم العنصر'}},
                     {
                         as: Radio, name: 'type', extra: {
                             __label: "Type",
                             options: itemTypeRadios
                         }
                     },
-                    {as: Checkbox, name: 'isActive', extra: {label: 'Activity'}},
+                    {as: Checkbox, name: 'isActive', extra: {label: 'نشط'}},
                     // {
                     //     as: AutoUpload, name: 'image', extra: {
                     //         __label: 'Add image',
@@ -66,10 +78,10 @@ class AddItemForm extends Component<Props> {
                       extra={{
 
                           renderOptions: {
-                              header: 'Add Item',
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
-                                                         onClick={() => form.submit()}>ADD</Button>
+                                                         className={classes.ButtonContainer}
+                                                         onClick={() => form.submit()}>اضافة</Button>
                               ],
                               actionsAlignments: "center"
                           },
@@ -77,9 +89,9 @@ class AddItemForm extends Component<Props> {
                       }}
                 />
             </Grid>
-        </Box>        );
+               );
     }
 
 }
 
-export default withRouter(AddItemForm)
+export default withStyles(styles)(withRouter(AddItemForm))

@@ -5,8 +5,21 @@ import {Button, Grid, Box} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {withRouter, RouteComponentProps} from 'react-router-dom'
 import AxiosSubmitter from "../../AxiosSubmitter";
+import {withStyles} from "@material-ui/core";
+
+
+const styles = (theme:any)=> ({
+    ButtonContainer:{
+        width:"20vw"
+    },
+
+})
+
+
+
 
 interface Props extends RouteComponentProps<any> {
+    classes?:any
 
 }
 
@@ -14,14 +27,15 @@ class AddItemTypeForm extends Component<Props> {
 
 
     render() {
-        return (<Box m={4}>
-                <Grid item xs={12}>
+        const {classes} = this.props
+        return (
+                <Grid item lg={4}>
                     <Form fields={[
-                        {as: Text, name: 'name', extra: {label: 'Item Type'}}
+                        {as: Text, name: 'name', extra: {label: 'اسم النوع'}}
                     ]}
 
                           listen={{
-                              [GlobalEvents.SUBMIT_FAILED]: (form, data) => alert("ali")
+                              [GlobalEvents.SUBMIT_FAILED]: (form, data) => alert("Error")
                           }}
 
                           services={{
@@ -41,11 +55,11 @@ class AddItemTypeForm extends Component<Props> {
 
                           extra={{
                               renderOptions: {
-                                  header: 'Add Item type',
 
                                   actions: [
                                       (form: any) => <Button color={"primary"} variant={'contained'}
-                                                             onClick={() => form.submit()}>ADD</Button>
+                                                             className={classes.ButtonContainer}
+                                                             onClick={() => form.submit()}>اضافة</Button>
                                   ],
                                   actionsAlignments: "center"
                               },
@@ -53,10 +67,10 @@ class AddItemTypeForm extends Component<Props> {
                           }}
                     />
                 </Grid>
-            </Box>
+
         );
     }
 
 }
 
-export default withRouter(AddItemTypeForm)
+export default withStyles(styles)(withRouter(AddItemTypeForm))

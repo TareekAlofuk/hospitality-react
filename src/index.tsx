@@ -7,19 +7,32 @@ import {BrowserRouter  } from "react-router-dom";
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {Provider} from 'react-redux';
 import Store from "./Store/Store";
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 
 setupRafMaterial();
 const  them = createMuiTheme({
-    direction: 'rtl'
+    typography:{
+        fontSize:22
+    },
+    direction : "rtl",
+    spacing: 10
 })
 
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={Store}>
-        <ThemeProvider theme={them}>
+            <StylesProvider jss={jss}>
+
+            <ThemeProvider theme={them}>
     <App />
         </ThemeProvider>
+                </StylesProvider>
         </Provider>
     </BrowserRouter>
     ,

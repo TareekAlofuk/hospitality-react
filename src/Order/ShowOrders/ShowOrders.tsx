@@ -2,24 +2,30 @@ import {Component} from 'react'
 import axios from "axios";
 import OrdersList from "./OrdersList";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Alert from '@material-ui/lab/Alert';
 import {Box, Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import SocketIO from "socket.io-client";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
+import InterfaceImageWithText from "../../helperComponents/InterfaceImageWithText";
 
 const styles = (theme: any) => ({
     root: {
         paddingTop: "8vh",
         justifyContent: "center",
         overflow: 'scroll',
-        backgroundColor: theme.palette.background.default,
     },
     container: {
         backgroundColor: theme.palette.background.default,
-        // height: "100%",
+        overflow: 'scroll',
+        height: "93vh",
+        width: "100vw"
+    },
+    emptyContainer: {
+        overflow: "hidden",
+        height: "93vh",
         width: "100vw"
     }
+
 
 })
 
@@ -47,7 +53,7 @@ class ShowOrders extends Component<Props> {
 
     state: State = {
         status: 0,
-        orders: null
+        orders: []
     }
 
     private socket: SocketIOClient.Socket | null = null;
@@ -59,16 +65,25 @@ class ShowOrders extends Component<Props> {
             this.socket = SocketIO(Endpoints.root);
 
             this.socket.on('NEW_ORDER', (data: any) => {
-                console.log(res.data);
-                const orders = [data, ...this.state.orders];
+                const orders = [ ...this.state.orders ,data];
                 this.setState({orders: orders});
-                console.log(data);
             });
 
-
-            this.socket.on('ORDER_STATUS_UPDATED', (data: any) => {
-
+            this.socket.on('ORDER_STATUS_CHANGED', (data: any) => {
+                const orders = this.state.orders.map((order: any) => {
+                    if (order._id === data._id) {
+                        order.status = data.newStatus
+                    }
+                    return order
+                })
+                this.setState({orders: orders});
             });
+
+            this.socket.on('ORDER_CANCELED', (data: any) => {
+                const orders = this.state.orders.filter((order: any) => order._id !== data._id)
+                this.setState({orders: orders});
+            });
+
 
         } catch (e) {
             console.log(e);
@@ -95,7 +110,6 @@ class ShowOrders extends Component<Props> {
                 }
                 return order
             })
-
             this.setState({orders: orders});
         } catch (e) {
             alert("حدث هنالك خطآ ما ")
@@ -115,8 +129,12 @@ class ShowOrders extends Component<Props> {
     render() {
         const {orders, status} = this.state
         const {classes, auth} = this.props;
+
         if (status === 0) {
             return <CircularProgress/>
+        } else if (orders.length === 0) {
+            return <InterfaceImageWithText imageSrc={"img/emptyOrder.svg"} textUnderImage={"ليست هنالك اي طلبات"}
+                                imageAlt={"لا توجد طلبات"}/>
         } else if (status === 1) {
             return (
                 <Box className={classes.container}>
@@ -127,7 +145,8 @@ class ShowOrders extends Component<Props> {
                 </Box>
             );
         } else {
-            return <Alert severity="error">there is an error !</Alert>
+            return <InterfaceImageWithText imageSrc={"img/warning.svg"} textUnderImage={" نأسف... يبدو ان هنالك خطآ"}
+                                imageAlt={"خطر"}/>
         }
 
     }

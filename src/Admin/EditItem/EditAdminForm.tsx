@@ -5,7 +5,19 @@ import {Box, Button, Grid} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import AxiosSubmitter from "../../AxiosSubmitter";
+import {withStyles} from "@material-ui/core";
 
+
+const styles = (theme:any)=>({
+    submitButton:{
+        height: theme.spacing(6),
+        width: theme.spacing(30)
+    }
+})
+
+interface Props extends RouteComponentProps<any> {
+    classes?:any
+}
 
 interface Props extends RouteComponentProps<any> {
     admin: any
@@ -15,16 +27,17 @@ class EditAdminForm extends Component<Props> {
 
 
     render() {
+        const {classes}=this.props
         const {admin}: any = this.props.location.state
-        return (<Box m={4}>
-            <Grid item xs={12}>
+        return (
+            <Grid item lg={3}>
                 <Form fields={[
-                    {as: Text, name: 'name', extra: {label: ' name'}},
-                    {as: Text, name: 'email', extra: {label: ' email'}},
-                    {as: Checkbox, name: 'operations', extra: {label: ' operations'}},
-                    {as: Checkbox, name: 'reports', extra: {label: ' reports'}},
-                    {as: Checkbox, name: 'inventory', extra: {label: ' inventory'}},
-                    {as: Checkbox, name: 'superAdmin', extra: {label: ' superAdmin'}}
+                    {as: Text, name: 'name', extra: {label: ' الاسم'}},
+                    {as: Text, name: 'email', extra: {label: ' الاميل'}},
+                    {as: Checkbox, name: 'operations', extra: {label: ' اتمام طلبات'}},
+                    {as: Checkbox, name: 'reports', extra: {label: ' انشاء تقارير'}},
+                    {as: Checkbox, name: 'inventory', extra: {label: ' عمل تعديلات'}},
+                    {as: Checkbox, name: 'superAdmin', extra: {label: ' اضافة/تعديل مسؤلين'}}
                 ]}
 
                     // listen={{
@@ -68,7 +81,8 @@ class EditAdminForm extends Component<Props> {
                           renderOptions: {
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
-                                                         onClick={() => form.submit()}>Edit</Button>
+                                                         className={classes.submitButton}
+                                                         onClick={() => form.submit()}>تعديل</Button>
                               ],
                               actionsAlignments: "center"
                           },
@@ -77,9 +91,9 @@ class EditAdminForm extends Component<Props> {
                       }}
                 />
             </Grid>
-        </Box>);
+        );
     }
 
 }
 
-export default withRouter(EditAdminForm)
+export default withStyles(styles)(withRouter(EditAdminForm))

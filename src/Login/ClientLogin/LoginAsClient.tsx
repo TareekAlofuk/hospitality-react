@@ -1,27 +1,32 @@
 import {Component} from "react";
 import {Button, Grid, withStyles} from "@material-ui/core";
-import {Form } from "@autofiy/raf-core";
+import {Form} from "@autofiy/raf-core";
 import {Select, Text} from "@autofiy/raf-material";
 import LoginAsClientSubmitter from "./LoginAsClientSubmitter";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import InterfaceImageWithText from "../../helperComponents/InterfaceImageWithText";
 
 interface Props extends RouteComponentProps<any> {
-    history:any
+    history: any
     classes?: any
-    rooms:any
+    rooms: any
 
 }
 
-const styles = (theme:any) => ({
+const styles = (theme: any) => ({
     root: {
         height: "100%",
         backgroundColor: "#fff",
-    } ,
-    icon:{
-        fontSize:theme.spacing(8),
-        color:"#dcdcdc"
     },
+    button: {
+        height: theme.spacing(6),
+        width: theme.spacing(30)
+    },
+
+    imageContainer: {
+        height: theme.spacing(55)
+    },
+
 
 })
 
@@ -29,41 +34,49 @@ const styles = (theme:any) => ({
 class LoginAsClient extends Component<Props> {
 
 
-
     render() {
         const {classes} = this.props;
-        return <Grid container className={classes.root} justify={"center"} alignItems={"center"} >
+        return <Grid container className={classes.root} justify={"center"} alignItems={"center"}>
+            <Grid container className={classes.imageContainer} item lg={12} justify={"center"}
+                  alignItems={"center"}>
+
+                <InterfaceImageWithText imageSrc={"img/login.svg"} imageAlt={"login"}/>
+
+            </Grid>
+
+            <Grid item xs={10} lg={3}>
+                <Form
+                    fields={[
+                        {as: Text, name: 'clientName', extra: {label: 'الاسم'}},
+                        {
+                            as: Select, name: 'roomName', extra: {
+                                label: 'اسم الغرفة',
+                                options: this.props.rooms
+                            }
+                        }
+                    ]}
 
 
-            <Grid item xs={10} md={2}  style={{textAlign: "center"}}>
-                <AccountCircleIcon className={classes.icon}/>
+                    services={{
+                        submitter: (form: any): any => new LoginAsClientSubmitter(form, () => {
+                            window.open("/" , "_self");
 
-                <Form fields={[
-                    {as: Text, name: 'clientName', extra: {label: 'الاسم'}},
-                    {as: Select, name: 'roomName', extra: {
-                        label: 'اسم الغرفة',
-                            options: this.props.rooms
+                        })
+                    }
+                    }
+                    extra={{
+                        renderOptions: {
+                            actions: [
+                                (form: any) => <Button
+                                    color={"primary"}
+                                    variant={'contained'}
+                                    className={classes.button}
+                                    onClick={() => form.submit()}>تسجيل</Button>
+                            ],
+                            actionsAlignments: "center"
+                        },
 
-                        }}
-                ]}
-
-
-                      services={{
-                          submitter: (form:any):any => new LoginAsClientSubmitter(form ,() => {
-                              this.props.history.push('/')
-                          })
-                      }
-                      }
-                      extra={{
-                          renderOptions: {
-                              actions: [
-                                  (form: any) => <Button color={"primary"} variant={'contained'}
-                                                         onClick={() => form.submit()}>تسجيل</Button>
-                              ],
-                              actionsAlignments: "center"
-                          },
-
-                      }}
+                    }}
                 />
             </Grid>
 

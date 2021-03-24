@@ -20,18 +20,38 @@ interface Props {
     classes: any
 }
 
-const styles = (theme:any) => ({
-    root:{
-      margin:theme.spacing(2)
+const styles = (theme: any) => ({
+    root: {
+        overflow: 'hidden',
     },
-    item:{
-        backgroundColor:"#fff",
-        height:'20vh',
-        padding:theme.spacing(2)
-    } ,
-    itemName:{
-        fontSize:"14px"
+    item: {
+        backgroundColor: "#fff",
+        height: '20vh',
+        width: "100%",
+        padding: "0px !important",
+        overflow: 'hidden',
+
+    },
+    itemName: {
+        fontSize: "18px !important",
+    },
+    itemNameInPop: {
+        fontSize: "24px !important",
+    },
+    image: {
+        height: "12vh",
+    },
+    imageContainer: {
+        height: "15vh",
+        overflow: "hidden"
+    },
+    itemNameContainer: {
+        height: "5vh",
+        width: "100%",
+        backgroundColor: theme.palette.grey[100] ,
+        paddingTop:"10px"
     }
+
 });
 
 class OrderItem extends Component<Props> {
@@ -86,17 +106,22 @@ class OrderItem extends Component<Props> {
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
                 >
-                    <Grid container  justify={"center"}>
-                        <Grid item md={12}>
-                        <CardMedia component="img"
-                                   image={item.image}
-                                   title={item.itemName}
-                        />
-                        </Grid>
-                        <Grid item md={12} >
-                        <Typography  component={"h6"} variant={"h6"} >{item.itemName}</Typography>
+                    <Grid container>
+                        <Grid item container md={12} className={classes.imageContainer} justify={"center"}
+                              alignItems={'center'}>
+                            <Grid item>
+                                <img
+                                    src={item.image}
+                                    alt={"item"}
+                                    className={classes.image}
+                                />
+                            </Grid>
                         </Grid>
 
+                            <Grid item md={12} className={classes.itemNameContainer}>
+                                <Typography className={classes.itemName} component={"h6"}
+                                            variant={"h6"}>{item.itemName}</Typography>
+                            </Grid>
                     </Grid>
 
                 </Button>
@@ -115,9 +140,9 @@ class OrderItem extends Component<Props> {
                         horizontal: 'center',
                     }}
                 >
-                    <Grid item container justify={"center"} alignItems={"center"} >
+                    <Grid item container justify={"center"} alignItems={"center"}>
                         <Grid item md={12}>
-                            <Typography variant={"h5"} align={"center"}>
+                            <Typography className={classes.itemNameInPop} variant={"h5"} align={"center"}>
                                 {this.props.item.itemName}
                             </Typography>
                         </Grid>
@@ -128,7 +153,7 @@ class OrderItem extends Component<Props> {
                                 </Typography>
                             </Box>
                         </Grid>
-                        <Grid item container justify={"center"} >
+                        <Grid item container justify={"center"}>
                             <Grid item md={2}>
                                 <IconButton
                                     onClick={this.removeItemFromCart}
