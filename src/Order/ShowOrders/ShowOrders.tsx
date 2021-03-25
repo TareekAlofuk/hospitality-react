@@ -10,18 +10,11 @@ import InterfaceImageWithText from "../../helperComponents/InterfaceImageWithTex
 
 const styles = (theme: any) => ({
     root: {
-        paddingTop: "8vh",
-        justifyContent: "center",
-        overflow: 'scroll',
+        overflow:"scroll",
+        marginTop: "8vh",
     },
-    container: {
-        backgroundColor: theme.palette.background.default,
-        overflow: 'scroll',
-        height: "93vh",
-        width: "100vw"
-    },
+
     emptyContainer: {
-        overflow: "hidden",
         height: "93vh",
         width: "100vw"
     }
@@ -133,16 +126,14 @@ class ShowOrders extends Component<Props> {
         if (status === 0) {
             return <CircularProgress/>
         } else if (orders.length === 0) {
-            return <InterfaceImageWithText imageSrc={"img/emptyOrder.svg"} textUnderImage={"ليست هنالك اي طلبات"}
+            return  <InterfaceImageWithText imageSrc={"img/emptyOrder.svg"} textUnderImage={"ليست هنالك اي طلبات"}
                                 imageAlt={"لا توجد طلبات"}/>
         } else if (status === 1) {
             return (
-                <Box className={classes.container}>
-                    <Grid container className={classes.root}>
+                    <Grid container item className={classes.root} justify={"center"}>
                         <OrdersList orders={orders} deleteOrder={this.deleteOrder} auth={auth}
                                     UpdateStatus={this.UpdateStatus}/>
                     </Grid>
-                </Box>
             );
         } else {
             return <InterfaceImageWithText imageSrc={"img/warning.svg"} textUnderImage={" نأسف... يبدو ان هنالك خطآ"}

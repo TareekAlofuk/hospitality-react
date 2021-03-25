@@ -35,7 +35,9 @@ export interface IEndpoints {
         add: string;
         delete: (id: string) => string;
         edit: (id: string) => string;
-        UpdateStatus:(id:string)=>string
+        UpdateStatus:(id:string)=>string ;
+        showUnderwayOrder:string;
+        showWaitingOrder:string;
     }
 }
 
@@ -120,6 +122,8 @@ export const Endpoints: IEndpoints = {
         },
         UpdateStatus: (id: string): string => {
             return makeEndpointWithId("Order/UpdateStatus", id)
-        }
+        },
+        showUnderwayOrder:makeEndpoint("Order/Underway"),
+        showWaitingOrder:makeEndpoint(("Order/Waiting"))
     }
 }

@@ -12,10 +12,9 @@ const styles = (theme: any) => ({
     root: {
         backgroundColor: "#fff",
         marginBottom: "3vh",
-        padding: "2vh",
+        padding: "2vh 0vh 2vh 2vh",
         borderRadius: "10px",
         boxShadow: "0px 6px 13px -1px rgba(0,0,0,0.05);",
-        width:'55vw',
         "& > *": {
             marginBottom: "1vh"
         }
@@ -27,7 +26,7 @@ const styles = (theme: any) => ({
         borderRadius: "100px",
         justifyContent: "center",
         marginBottom: "1vh",
-        marginLeft: "1vw"
+        marginRight:theme.spacing(2)
     },
     roomName: {
         marginBottom: "2vh"
@@ -47,14 +46,14 @@ interface Props {
     classes: any
     deleteOrder: any
     auth: any
-    UpdateStatus:any
+    UpdateStatus: any
 
 }
 
 class OrderCard extends Component<Props> {
 
     render() {
-        const {order, deleteOrder, auth ,UpdateStatus} = this.props;
+        const {order, deleteOrder, auth, UpdateStatus} = this.props;
         const {classes} = this.props;
         let isGuestStyle = "";
         if (order.isGust) {
@@ -63,28 +62,28 @@ class OrderCard extends Component<Props> {
 
 
         return (
-            <Grid container  item className={`${isGuestStyle} ${classes.root}  `}>
-                <Grid item container alignItems="center"  >
+            <Grid container item lg={7} md={8} xs={11} sm={9} className={`${isGuestStyle} ${classes.root}`}>
+                <Grid item container alignItems="center">
                     <Grid item><PersonOutlineOutlinedIcon fontSize={"large"} color={'primary'}/></Grid>
                     <Grid item className={classes.text}>{order.client.clientName}</Grid>
                 </Grid>
 
-                <Grid item container className={classes.roomName} alignItems="center" >
+                <Grid item container className={classes.roomName} alignItems="center">
                     <Grid item><RoomOutlinedIcon fontSize={"default"} color={'primary'}/></Grid>
                     <Grid item className={classes.text}>{order.client.roomName}</Grid>
                 </Grid>
 
-                <Grid item md={12}>
+                <Grid item container >
                     {
                         order.items.map((item: any) => {
-                            return <Grid container key={item._id}>
-
-                                <Grid item container className={classes.itemCount} md={1}>
-                                    <Grid item >
+                            return <Grid item container key={item._id} >
+                                <Grid item container justify={"center"} className={classes.itemCount}  lg={1} md={1} xs={2}>
+                                    <Grid >
                                         {item.count}
                                     </Grid>
                                 </Grid>
-                                <Grid item>
+
+                                <Grid item xs={7}>
                                     {item.itemName}
                                 </Grid>
                             </Grid>
@@ -94,7 +93,7 @@ class OrderCard extends Component<Props> {
                 </Grid>
 
                 {order.note &&
-                <Grid item container alignItems="center" >
+                <Grid item container alignItems="center">
                     <Grid item><NoteIcon fontSize={"default"} color={'primary'}/></Grid>
                     <Grid item md={4} className={classes.text}> {order.note}</Grid>
                 </Grid>
@@ -102,21 +101,21 @@ class OrderCard extends Component<Props> {
 
                 {
                     order.status === 0 &&
-                    <Grid item container alignItems="center" >
+                    <Grid item container alignItems="center">
                         <Grid item><DoneIcon color={"disabled"}/></Grid>
                         <Grid item className={classes.text}>قيد الانتضار </Grid>
                     </Grid>
                 }
                 {
                     order.status === 1 &&
-                    <Grid item container alignItems="center" >
+                    <Grid item container alignItems="center">
                         <Grid item><DoneAllIcon color={"disabled"}/></Grid>
                         <Grid item className={classes.text}> قيد العمل</Grid>
                     </Grid>
                 }
                 {
                     order.status === 2 &&
-                    <Grid item container alignItems="center" >
+                    <Grid item container alignItems="center">
                         <Grid item><DoneAllIcon color={"primary"}/></Grid>
                         <Grid item className={classes.text}>مكتمل</Grid>
                     </Grid>
@@ -148,27 +147,27 @@ class OrderCard extends Component<Props> {
                     <Grid item md={12}>
 
                         {
-                            order.status===0 &&
+                            order.status === 0 &&
                             <Button
                                 color="primary"
                                 variant={"contained"}
                                 onClick={() => {
-                                    UpdateStatus(order._id , 1)
+                                    UpdateStatus(order._id, 1)
                                 }}
                             >
-                            بدأ العمل
+                                بدأ العمل
                             </Button>
                         }
                         {
-                            order.status===1 &&
+                            order.status === 1 &&
                             <Button
                                 color="primary"
                                 variant={"contained"}
                                 onClick={() => {
-                                    UpdateStatus(order._id  , 2)
+                                    UpdateStatus(order._id, 2)
                                 }}
                             >
-                            تم
+                                تم
                             </Button>
                         }
 

@@ -35,7 +35,7 @@ class App extends Component<Props> {
 
     render() {
         return (
-            <Grid container className="App" style={{direction: "rtl", height: "100vh"}} justify={"center"} >
+            <Grid container className="App" style={{direction: "rtl"}} justify={"center"} alignItems={"center"} >
                 {(localStorage.getItem("permissions")) ?
                     <NavigationBar/> : ""}
 

@@ -16,6 +16,14 @@ class OperationsRoutes extends React.Component {
                                                          getUrl={Endpoints.Order.get}
                                                          deleteUrl={Endpoints.Order.delete}
                                                          updateUrl={Endpoints.Order.UpdateStatus}/></Route>
+                <Route exact path={"/UnderwayOrder"} key={"showUnderwayOrder"}><ShowOrders auth={"operations"}
+                                                         getUrl={Endpoints.Order.showUnderwayOrder}
+                                                         deleteUrl={Endpoints.Order.delete}
+                                                         updateUrl={Endpoints.Order.UpdateStatus}/></Route>
+                <Route exact path={"/Waiting"} key={"showWaitingOrder"}><ShowOrders auth={"operations"}
+                                                         getUrl={Endpoints.Order.showWaitingOrder}
+                                                         deleteUrl={Endpoints.Order.delete}
+                                                         updateUrl={Endpoints.Order.UpdateStatus}/></Route>
             </Switch>
 
         );

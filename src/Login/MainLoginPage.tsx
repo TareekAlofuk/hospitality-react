@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {Button, Grid, withStyles} from "@material-ui/core";
+import {Button, Grid, withStyles, withWidth} from "@material-ui/core";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Link} from "react-router-dom"
 import InterfaceImageWithText from "../helperComponents/InterfaceImageWithText";
@@ -8,6 +8,7 @@ interface Props extends RouteComponentProps<any> {
     history: any
     classes?: any
     rooms: any
+    width:any
 }
 
 
@@ -24,23 +25,25 @@ const styles = (theme: any) => ({
         width: theme.spacing(30)
     },
     imageContainer: {
-        height: theme.spacing(60)
+        height:"90vh"
     },
 
 })
 
 
 class MainLoginPage extends Component<Props> {
-
     render() {
         const imageName = Math.floor((Math.random() * 7) + 1);
 
-        const {classes} = this.props;
+        const {classes , width} = this.props;
+        const imageContainerHeight = width ==='sm' || width==='xs' ? '65vh':'90vh';
+
         return <>
             <Grid container className={classes.root} justify={"center"} alignItems={"center"}>
 
-                <Grid container className={classes.imageContainer} item lg={12} justify={"center"}
-                      alignItems={"center"}>
+                <Grid container  item lg={12} justify={"center"}
+                      alignItems={"center"}
+                      style={{height:imageContainerHeight}}>
                     <InterfaceImageWithText imageSrc={`img/${imageName}.svg`}  imageAlt={"login"}/>
 
                 </Grid>
@@ -77,4 +80,4 @@ class MainLoginPage extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(withRouter(MainLoginPage))
+export default withStyles(styles)(withWidth()(withRouter(MainLoginPage)))
