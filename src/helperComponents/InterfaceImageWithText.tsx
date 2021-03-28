@@ -13,31 +13,31 @@ interface Props {
 
 
 const styles = (theme:any) => ({
-    imageContainer: {
-        overflow: "hidden",
-        width: "100vw",
-    },
-    image: {
-        height: theme.spacing(45)
+
+    imagePc: {
+        height: theme.spacing(45),
+        paddingTop:theme.spacing(18)
+    } ,
+    imageMobile: {
+        height: theme.spacing(28),
+        paddingTop:theme.spacing(13)
     }
+
 
 
 });
 class InterfaceImageWithText extends Component<Props> {
 
     render() {
+        console.log(this.props.imageSrc)
         const {classes ,width} = this.props
-        const imgWidth = width === 'sm' || width === 'xs' ?"300px":"750px"
+        const imageClass = width === 'sm' || width === 'xs' ? classes.imageMobile:classes.imagePc
         return (
-            <Box className={classes.imageContainer} >
             <Grid container  item lg={12} justify={"center"}
                   alignItems={"center"} direction={"column"} spacing={2}>
                 <Grid item>
                     <img
-                        style={{
-                            width:imgWidth,
-                        marginTop:"13vh"
-                    }}
+                        className={imageClass}
                           src={`${this.props.imageSrc}`} alt={this.props.imageAlt}/>
                 </Grid>
                 {this.props.textUnderImage ?
@@ -46,7 +46,6 @@ class InterfaceImageWithText extends Component<Props> {
                     </Grid>:""
                 }
             </Grid>
-            </Box>
         );
     }
 }

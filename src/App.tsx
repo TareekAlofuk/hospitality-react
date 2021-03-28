@@ -38,8 +38,7 @@ class App extends Component<Props> {
             <Grid container className="App" style={{direction: "rtl"}} justify={"center"} alignItems={"center"} >
                 {(localStorage.getItem("permissions")) ?
                     <NavigationBar/> : ""}
-
-                <RoutesContainer/>
+                        <RoutesContainer/>
             </Grid>
         );
     }

@@ -3,7 +3,7 @@ import {Button, Grid, withStyles, withWidth} from "@material-ui/core";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Link} from "react-router-dom"
 import InterfaceImageWithText from "../helperComponents/InterfaceImageWithText";
-
+import image_1 from "./../../public/img/1.svg"
 interface Props extends RouteComponentProps<any> {
     history: any
     classes?: any
@@ -44,7 +44,7 @@ class MainLoginPage extends Component<Props> {
                 <Grid container  item lg={12} justify={"center"}
                       alignItems={"center"}
                       style={{height:imageContainerHeight}}>
-                    <InterfaceImageWithText imageSrc={`img/${imageName}.svg`}  imageAlt={"login"}/>
+                    <InterfaceImageWithText imageSrc={`/img/${imageName}.svg`}  imageAlt={"login"}/>
 
                 </Grid>
 
