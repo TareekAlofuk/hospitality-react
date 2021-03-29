@@ -1,10 +1,11 @@
 import {Component} from "react";
-import {Box, Button, CardMedia, Grid, IconButton, Typography} from "@material-ui/core";
+import {Box, Button, Grid, IconButton, Typography} from "@material-ui/core";
 import Popover from '@material-ui/core/Popover';
 import {withStyles} from "@material-ui/core/styles";
 import MinimizeIcon from "@material-ui/icons/Minimize";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import {withWidth} from "@material-ui/core";
 
 interface Props {
     item: {
@@ -17,7 +18,8 @@ interface Props {
     count: any,
     removeItemFromCart: any,
     removeAllItemFromCart: any,
-    classes: any
+    classes: any,
+    width: any
 }
 
 const styles = (theme: any) => ({
@@ -30,26 +32,25 @@ const styles = (theme: any) => ({
         width: "100%",
         padding: "0px !important",
         overflow: 'hidden',
-
     },
-    itemName: {
+    text: {
         fontSize: "18px !important",
     },
     itemNameInPop: {
         fontSize: "24px !important",
     },
     image: {
-        height: "12vh",
+        height: "60px",
     },
     imageContainer: {
         height: "15vh",
         overflow: "hidden"
     },
     itemNameContainer: {
-        height: "5vh",
         width: "100%",
-        backgroundColor: theme.palette.grey[100] ,
-        paddingTop:"10px"
+        backgroundColor: theme.palette.grey[100],
+        padding: "10px",
+        marginBottom:"10px"
     }
 
 });
@@ -57,6 +58,8 @@ const styles = (theme: any) => ({
 class OrderItem extends Component<Props> {
     state = {anchorEl: null, buttonPressTimer: undefined}
     handleMouseDown = (event: any) => {
+        event.preventDefault();
+
         const currentTarget = event.currentTarget;
         if (this.state.buttonPressTimer) clearTimeout(this.state.buttonPressTimer)
         this.setState({
@@ -93,11 +96,12 @@ class OrderItem extends Component<Props> {
 
     render() {
         const {item} = this.props
-        const {classes} = this.props
+        const {classes, width} = this.props
+        const isMobile = width === 'xs' || width === 'sm'
         const open = Boolean(this.state.anchorEl);
         const id = open ? 'simple-popover' : undefined;
         return (
-            <Grid item md={3} className={classes.root}>
+            <Grid item md={3} lg={3} xs={6} sm={4} className={classes.root}>
 
                 <Button
                     className={classes.item}
@@ -105,6 +109,7 @@ class OrderItem extends Component<Props> {
                     onClick={this.addItemToCart}
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
+
                 >
                     <Grid container>
                         <Grid item container md={12} className={classes.imageContainer} justify={"center"}
@@ -118,13 +123,21 @@ class OrderItem extends Component<Props> {
                             </Grid>
                         </Grid>
 
-                            <Grid item md={12} className={classes.itemNameContainer}>
-                                <Typography className={classes.itemName} component={"h6"}
+                        <Grid item container md={12}  className={classes.itemNameContainer}>
+                            <Grid item xs={10}>
+                                <Typography className={classes.text} component={"h6"}
                                             variant={"h6"}>{item.itemName}</Typography>
                             </Grid>
+                            <Grid item xs={2} >
+                                <Typography className={classes.text} component={"h6"}
+                                            variant={"h6"}>{this.props.count}</Typography>
+                            </Grid>
+                        </Grid>
+
                     </Grid>
 
                 </Button>
+
 
                 <Popover
                     id={id}
@@ -187,4 +200,4 @@ class OrderItem extends Component<Props> {
     }
 }
 
-export default withStyles(styles)(OrderItem)
+export default withWidth()(withStyles(styles)(OrderItem))

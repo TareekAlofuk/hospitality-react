@@ -31,7 +31,20 @@ const styles = (theme: any) => ({
     button: {
         height: theme.spacing(6),
         width: "100%"
-    }
+    },
+    sendButtonContainer: {
+        bottom: "0",
+        backgroundColor: theme.palette.primary.main,
+        display: 'flex',
+        alignItems: "center",
+        justify: "center",
+        opacity:"90%"
+    },
+
+    sendButton: {
+        flex: 1,
+    },
+
 });
 
 class MetadataForm extends Component<Props & ReduxProps> {
@@ -116,16 +129,19 @@ class MetadataForm extends Component<Props & ReduxProps> {
                         }
                         label="زائر"
                     /><br/>
-
+                <Box position={"sticky"} className={classes.sendButtonContainer}>
                     <Button
                         variant="contained"
                         type="submit"
                         value="Submit"
                         color={"primary"}
-                        className={classes.button}
+                        className={classes.sendButton}
                     >
-                        اطلب الآن
+                        ارسال الطلب
                     </Button>
+                </Box>
+
+
                 </ValidatorForm>
             </Box>
 

@@ -23,9 +23,7 @@ const styles = (theme: any) => ({
         width: theme.spacing(30)
     },
 
-    imageContainer: {
-        height: theme.spacing(55)
-    },
+
 
 
 })
@@ -37,11 +35,9 @@ class LoginAsClient extends Component<Props> {
     render() {
         const {classes} = this.props;
         return <Grid container className={classes.root} justify={"center"} alignItems={"center"}>
-            <Grid container className={classes.imageContainer} item lg={12} justify={"center"}
+            <Grid container  item lg={12} justify={"center"}
                   alignItems={"center"}>
-
-                <InterfaceImageWithText imageSrc={"img/login.svg"} imageAlt={"login"}/>
-
+                <InterfaceImageWithText imageSrc={"img/login.svg"} imageAlt={"login"} locationInMobileScreen={'top'}/>
             </Grid>
 
             <Grid item xs={10} lg={3}>

@@ -13,7 +13,7 @@ interface Props extends RouteComponentProps {
 
 const styles = (theme: any) => ({
     root: {
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: theme.palette.primary.main,
     },
     button: {
         borderRadius: "0",
@@ -35,7 +35,6 @@ const styles = (theme: any) => ({
     navigationButtonContainer: {
         top: '0',
         width: "100vw",
-        padding: "30px",
     }
 
 })
@@ -53,6 +52,9 @@ class NavigationBar extends Component<Props> {
     }
     loginAsClient = () => {
         this.props.history.push("/LoginAsClient")
+    }
+    closeNavbar = () => {
+        this.setState({open: false})
     }
 
     render() {
@@ -82,6 +84,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     اضافة طلب
                                                 </Button>
@@ -92,6 +95,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/Order'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     طلباتي
                                                 </Button>
@@ -106,6 +110,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/Admin'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     كل المسؤلين
                                                 </Button>
@@ -119,6 +124,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/Room'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     الغرف
                                                 </Button>
@@ -128,6 +134,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/Item'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     المواد
                                                 </Button>
@@ -137,6 +144,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/ItemType'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     انواع المواد
                                                 </Button>
@@ -150,6 +158,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/Order'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     كل الطلبات
                                                 </Button>
@@ -158,6 +167,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/Waiting'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     جار الانتضار
                                                 </Button>
@@ -166,6 +176,7 @@ class NavigationBar extends Component<Props> {
                                         <Grid item>
                                             <Link to={'/UnderwayOrder'} className={classes.link}>
                                                 <Button
+                                                    onClick={this.closeNavbar}
                                                     className={classes.button}>
                                                     جار العمل
                                                 </Button>
@@ -180,9 +191,7 @@ class NavigationBar extends Component<Props> {
                                     <Grid item>
                                         <IconButton
                                             className={classes.button}
-                                            onClick={() => {
-                                                this.setState({open: false})
-                                            }}
+                                            onClick={this.closeNavbar}
                                         >
                                             <Close/>
                                         </IconButton>

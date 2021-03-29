@@ -8,7 +8,8 @@ interface Props {
     imageSrc:string,
     textUnderImage?:any,
     imageAlt:string,
-    width?:any
+    width:any,
+    locationInMobileScreen?:any
 }
 
 
@@ -16,10 +17,16 @@ const styles = (theme:any) => ({
 
     imagePc: {
         height: theme.spacing(45),
-        paddingTop:theme.spacing(18)
+        paddingTop:"100px !important"
     } ,
     imageMobile: {
-        height: theme.spacing(28),
+        height: theme.spacing(27),
+        width: theme.spacing(30),
+    },
+    imageInTop:{
+        paddingTop:theme.spacing(0)
+    },
+    imageInCenter:{
         paddingTop:theme.spacing(13)
     }
 
@@ -30,14 +37,16 @@ class InterfaceImageWithText extends Component<Props> {
 
     render() {
         console.log(this.props.imageSrc)
-        const {classes ,width} = this.props
+        const {classes ,width , locationInMobileScreen} = this.props
         const imageClass = width === 'sm' || width === 'xs' ? classes.imageMobile:classes.imagePc
+        const imageLocation = locationInMobileScreen === "top" ? classes.imageInTop:classes.imageInCenter
+
         return (
             <Grid container  item lg={12} justify={"center"}
                   alignItems={"center"} direction={"column"} spacing={2}>
                 <Grid item>
                     <img
-                        className={imageClass}
+                        className={`${imageClass}  ${imageLocation}`}
                           src={`${this.props.imageSrc}`} alt={this.props.imageAlt}/>
                 </Grid>
                 {this.props.textUnderImage ?

@@ -44,12 +44,12 @@ class CartItem extends Component<Props> {
         const {classes} = this.props
         return (
             <Grid item container justify={"center"} alignItems={"center"} className={classes.root}>
-                <Grid item md={12}>
+                <Grid item md={12} xs={12}>
                     <Typography variant={"h5"} align={"center"}>
                         {itemName}
                     </Typography>
                 </Grid>
-                <Grid item md={12}>
+                <Grid item md={12} xs={12}>
                     <Box>
                         <Typography className={classes.count} variant={"h5"} align={"center"}>
                             {count}

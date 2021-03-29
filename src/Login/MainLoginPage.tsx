@@ -14,19 +14,15 @@ interface Props extends RouteComponentProps<any> {
 
 const styles = (theme: any) => ({
 
-    root: {
-        height: "100%"
-    },
+
     link: {
         textDecoration: "none",
     },
     button: {
         height: theme.spacing(6),
-        width: theme.spacing(30)
+        width: theme.spacing(30),
     },
-    imageContainer: {
-        height:"90vh"
-    },
+
 
 })
 
@@ -39,12 +35,12 @@ class MainLoginPage extends Component<Props> {
         const imageContainerHeight = width ==='sm' || width==='xs' ? '65vh':'90vh';
 
         return <>
-            <Grid container className={classes.root} justify={"center"} alignItems={"center"}>
+            <Grid container justify={"center"} alignItems={"center"}>
 
                 <Grid container  item lg={12} justify={"center"}
                       alignItems={"center"}
                       style={{height:imageContainerHeight}}>
-                    <InterfaceImageWithText imageSrc={`/img/${imageName}.svg`}  imageAlt={"login"}/>
+                    <InterfaceImageWithText imageSrc={`/img/${imageName}.svg`}  imageAlt={"login"} locationInMobileScreen={'top'}/>
 
                 </Grid>
 
