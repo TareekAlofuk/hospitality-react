@@ -1,8 +1,7 @@
 import {Component} from "react";
-import {Grid, withStyles, Button, Tooltip, withWidth, Box, IconButton, Collapse, Drawer, Fade} from "@material-ui/core";
+import {AppBar, Box, Button, Fade, Grid, IconButton, Tooltip, withStyles, withWidth} from "@material-ui/core";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {Link} from "react-router-dom";
-import {withRouter, RouteComponentProps} from "react-router-dom"
+import {Link, RouteComponentProps, withRouter} from "react-router-dom";
 import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';
 import {Close} from "@material-ui/icons";
 
@@ -26,10 +25,7 @@ const styles = (theme: any) => ({
     link: {
         textDecoration: "none",
     },
-    top: {
-        top: '0',
-        width: '100vw',
-    },
+
     open: {},
     close: {},
     navigationButtonContainer: {
@@ -63,15 +59,17 @@ class NavigationBar extends Component<Props> {
         const direction = width === "xs" || width === "sm" ? "column" : "row"
         const isMobile = (width === "xs" || width === "sm")
         if (isMobile && !(this.state.open)) {
-            return <Box className={classes.navigationButtonContainer} position={'sticky'}><IconButton color={"primary"}
-                                                                                                      onClick={() => {
-                                                                                                          this.setState({open: true})
-                                                                                                      }}><ViewHeadlineIcon/></IconButton></Box>
+            return <div className={classes.navigationButtonContainer} style={{position:"sticky"}}  >
+                <IconButton color={"primary"}
+                            onClick={() => {
+                                this.setState({open: true})
+                            }}><ViewHeadlineIcon/></IconButton>
+            </div>
         } else {
             return (
                 <Fade in={this.state.open || !(isMobile)} timeout={{enter: 800, exit: 800}}>
 
-                    <Box className={classes.top} position={'sticky'}>
+                    <AppBar position="sticky">
 
                         <Grid container className={classes.root} justify={"center"} alignItems={"center"}
                               direction={direction}>
@@ -112,7 +110,7 @@ class NavigationBar extends Component<Props> {
                                                 <Button
                                                     onClick={this.closeNavbar}
                                                     className={classes.button}>
-                                                    كل المسؤلين
+                                                    كل المسؤولين
                                                 </Button>
                                             </Link>
                                         </Grid>
@@ -169,7 +167,7 @@ class NavigationBar extends Component<Props> {
                                                 <Button
                                                     onClick={this.closeNavbar}
                                                     className={classes.button}>
-                                                    جار الانتضار
+                                                    قيد الانتظار
                                                 </Button>
                                             </Link>
                                         </Grid>
@@ -215,8 +213,7 @@ class NavigationBar extends Component<Props> {
                             }
 
                         </Grid>
-
-                    </Box>
+                    </AppBar>
                 </Fade>
 
             );

@@ -3,11 +3,9 @@ import Axios from "axios";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {AutoCollection, IAutoCollection} from "@autofiy/rac-core";
 import {Table} from "@autofiy/rac-material";
-import {Button, Grid, TableCell} from "@material-ui/core";
+import {Button, Grid, TableCell, withStyles} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import AxiosReceiver from "../../AxiosReceiver";
-
-import {withStyles} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 
@@ -15,11 +13,9 @@ const styles = (theme: any) => ({
     root: {
         height: "88vh",
     },
-    addButtonContainer: {
-        height: "10vh",
-    },
+    addButtonContainer: {},
     formContainer: {
-        height: "78vh",
+        height: "70vh",
         overflow: "scroll"
     }
 })
@@ -46,11 +42,10 @@ class RoomContainer extends React.Component<Props> {
 
     render() {
         const {classes} = this.props
-        return <Grid container justify={"center"} className={classes.root}>
-
+        return <Grid container item justify={"center"} alignItems={"center"} className={classes.root}>
             <Grid item lg={7} className={classes.addButtonContainer}>
                 <Button
-                    startIcon={<AddIcon />}
+                    startIcon={<AddIcon/>}
                     component={Link}
                     to={'./AddRoom'}
                     variant={'contained'}

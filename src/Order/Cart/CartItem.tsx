@@ -1,9 +1,10 @@
 import {Component} from "react";
-import {Box, Grid, IconButton, Typography} from "@material-ui/core";
+import {Box, Button, Grid, IconButton, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import MinimizeIcon from '@material-ui/icons/Minimize';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import {Remove} from "@material-ui/icons";
 
 const styles = () => ({
     root: {
@@ -58,28 +59,31 @@ class CartItem extends Component<Props> {
                 </Grid>
                 <Grid item container justify={"center"} >
                     <Grid item md={2}>
-                        <IconButton
+                        <Button
+                            variant={"contained"}
                             onClick={this.removeItemFromCart}
                         >
-                            <MinimizeIcon/>
-                        </IconButton>
+                            <Remove/>
+                        </Button>
                     </Grid>
 
                     <Grid item md={2}>
-                        <IconButton
+                        <Button
                             onClick={this.addItemToCart}
+                            variant={"contained"}
                         >
                             <AddIcon/>
-                        </IconButton>
+                        </Button>
                     </Grid>
 
                     <Grid item md={2}>
-                        <IconButton
+                        <Button
                             onClick={this.removeAllItemFromCart}
                             color={"secondary"}
+                            variant={"contained"}
                         >
                             <DeleteOutlineIcon/>
-                        </IconButton>
+                        </Button>
                     </Grid>
 
                 </Grid>

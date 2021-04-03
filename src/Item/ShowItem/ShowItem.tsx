@@ -15,10 +15,9 @@ const styles = (theme: any) => ({
         height: "88vh",
     },
     addButtonContainer: {
-        height: "10vh",
     },
     formContainer: {
-        height: "78vh",
+        height: "70vh",
         overflow: "scroll"
     }
 })
@@ -44,7 +43,7 @@ class ShowItem extends Component<Props> {
     render() {
         const {classes} = this.props
 
-        return <Grid container justify={"center"} className={classes.root}>
+        return <Grid container justify={"center"} alignItems={'center'} className={classes.root}>
 
             <Grid item lg={7} className={classes.addButtonContainer}>
                 <Button

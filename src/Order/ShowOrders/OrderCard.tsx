@@ -7,6 +7,7 @@ import NoteIcon from '@material-ui/icons/Note';
 import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import {Close} from "@material-ui/icons";
 
 const styles = (theme: any) => ({
     root: {
@@ -33,11 +34,14 @@ const styles = (theme: any) => ({
     },
     text: {
         borderRadius: "5px",
-        marginRight: "1vw"
+        marginLeft: "10px"
     },
     isGuest: {
         borderTop: '1px ridge #1C6EA4',
         borderColor: theme.palette.primary.light
+    },
+    cardButton:{
+        marginRight:"10px"
     }
 });
 
@@ -103,7 +107,7 @@ class OrderCard extends Component<Props> {
                     order.status === 0 &&
                     <Grid item container alignItems="center">
                         <Grid item><DoneIcon color={"disabled"}/></Grid>
-                        <Grid item className={classes.text}>قيد الانتضار </Grid>
+                        <Grid item className={classes.text}>قيد الانتظار </Grid>
                     </Grid>
                 }
                 {
@@ -121,6 +125,13 @@ class OrderCard extends Component<Props> {
                     </Grid>
                 }
                 {
+                    order.status === 3 &&
+                    <Grid item container alignItems="center">
+                        <Grid item><Close color={"secondary"}/></Grid>
+                        <Grid item className={classes.text}>غير متوفر</Grid>
+                    </Grid>
+                }
+                {
                     order.isGust &&
                     <Grid item container alignItems="center">
                         <Grid item><FavoriteIcon color={"secondary"}/></Grid>
@@ -129,7 +140,7 @@ class OrderCard extends Component<Props> {
                 }
                 {
                     order.status === 0 && auth === 'client' &&
-                    <Grid item md={12}>
+                    <Grid item md={12}  >
                         <Button
                             color="primary"
                             variant={"contained"}
@@ -144,12 +155,13 @@ class OrderCard extends Component<Props> {
 
                 {
                     auth === 'operations' &&
-                    <Grid item md={12}>
+                    <Grid item md={12} >
 
                         {
                             order.status === 0 &&
                             <Button
                                 color="primary"
+                                className={classes.cardButton}
                                 variant={"contained"}
                                 onClick={() => {
                                     UpdateStatus(order._id, 1)
@@ -157,6 +169,20 @@ class OrderCard extends Component<Props> {
                             >
                                 بدأ العمل
                             </Button>
+
+                        }
+                        {
+                            order.status === 0 &&
+                            <Button
+                                color="secondary"
+                                variant={"contained"}
+                                onClick={() => {
+                                    UpdateStatus(order._id, 3)
+                                }}
+                            >
+                                رفض
+                            </Button>
+
                         }
                         {
                             order.status === 1 &&

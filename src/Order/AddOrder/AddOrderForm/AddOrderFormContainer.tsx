@@ -37,9 +37,7 @@ const styles = (theme:any) => ({
     input: {
         width: "100%",
     } ,
-    message:{
-        backgroundColor:theme.palette.primary.light
-    },
+
 
 });
 
@@ -55,7 +53,7 @@ class AddOrderFormContainer extends Component<Props & ReduxProps> {
         const {classes , width , display} = this.props;
         const isMobile = width === 'xs' || width === 'sm'
         return (
-            <Box className={classes.root} style={{scrollbarWidth:'none' , scrollbarColor:"#f1f1f1"}} display={display}>
+            <Box className={classes.root}  display={display}>
                 <CartContainer
                     cart={this.props.cart}
                     removeItemFromCart={this.props.removeItemFromCart}

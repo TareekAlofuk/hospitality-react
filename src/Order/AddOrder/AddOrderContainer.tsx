@@ -1,16 +1,5 @@
-import {Component} from "react";
-import React from "react";
-import {
-    Box,
-    Button,
-    CircularProgress,
-    Dialog,
-    Grid,
-    IconButton, Slide,
-    Snackbar,
-    withStyles,
-    withWidth
-} from "@material-ui/core";
+import React, {Component} from "react";
+import {Box, Button, CircularProgress, Dialog, Grid, IconButton, Slide, Snackbar, withWidth} from "@material-ui/core";
 import AddOrderItems from "./AddOrderItems";
 import {connect, ConnectedProps} from 'react-redux'
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
@@ -22,6 +11,8 @@ import InterfaceImageWithText from "../../helperComponents/InterfaceImageWithTex
 import {setIsGuest, setNote} from "../../Store/Action/OrderFormActions";
 import {Close} from "@material-ui/icons";
 import {TransitionProps} from "@material-ui/core/transitions";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+import {withStyles} from "@material-ui/core/styles";
 
 const mapStateToProps = (store: any) => {
     return {
@@ -49,9 +40,10 @@ const mapDispatchToProps = (dispatch: any) => {
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
-interface Props {
+interface Props extends RouteComponentProps {
     classes?: any,
-    width: any
+    width: any,
+    history: any
 }
 
 interface metaData {
@@ -99,7 +91,10 @@ const styles = (theme: any) => ({
     addButton: {
         color: "#fff",
         flex: 0.5
-    }
+    },
+    message:{
+        backgroundColor:theme.palette.primary.light
+    },
 
 });
 
@@ -111,7 +106,7 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
         room: [],
         messageStatus: false,
         message: "",
-        openCart:false
+        openCart: false
     }
 
     getActiveItems = async () => {
@@ -138,7 +133,8 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
                 isGust: metaData.isGust,
                 userId: metaData.userId
             })
-            this.setState({messageStatus: true, message: "تم ارسال طلبك بنجاح"})
+            this.setState({messageStatus: true, message: "تم ارسال طلبك بنجاح ...سيتم تحويلك الى الطلبات "})
+            setTimeout(()=>{this.props.history.push('/Order')}, 2000)
         } catch (e) {
             this.setState({messageStatus: true, message: "عذرا .. لم يتم ارسال الطلب عاود المحاولة"})
         }
@@ -192,11 +188,11 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
 
     }
     handleClickOpenCart = () => {
-        this.setState({openCart:true});
+        this.setState({openCart: true});
     };
 
     handleCloseCart = () => {
-        this.setState({openCart:false});
+        this.setState({openCart: false});
     };
 
 
@@ -210,8 +206,8 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
     render() {
         const {classes, width} = this.props
         const isMobile = width === 'xs' || width === 'sm'
-        const displayForPc  = isMobile?"none":""
-        const displayForMobile  = isMobile?"":"none"
+        const displayForPc = isMobile ? "none" : ""
+        const displayForMobile = isMobile ? "" : "none"
 
         if (this.state.loadItemsStatus === 'Loading') {
             return <CircularProgress color="primary"/>
@@ -241,31 +237,33 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
                     </Grid>
                     {isMobile ?
                         <Box className={classes.seeMore} position={"absolute"}>
-                                <Button className={classes.seeMoreButton} onClick={this.handleClickOpenCart}>
-                                    عرض السلة
-                                </Button>
-                                <Button className={classes.addButton} onClick={this.onSubmitOrder}>
-                                    ارسال الطلب
-                                </Button>
+                            <Button className={classes.seeMoreButton} onClick={this.handleClickOpenCart}>
+                                عرض السلة
+                            </Button>
+                            <Button className={classes.addButton} onClick={this.onSubmitOrder}>
+                                ارسال الطلب
+                            </Button>
                         </Box> : ""
                     }
-                <Dialog fullScreen open={this.state.openCart} onClose={this.handleCloseCart} TransitionComponent={Transition} dir={"rtl"} >
-                    <AddOrderFormContainer
-                        cart={this.props.cart}
-                        removeItemFromCart={this.props.removeItemFromCart}
-                        addItemToCart={this.props.addItemToCart}
-                        removeAllItemFromCart={this.props.removeAllItemFromCart}
-                        removeAllCart={this.props.removeAllCart}
-                        onSubmitOrder={this.onSubmitOrder}
-                        room={this.state.room}
-                        display={displayForMobile}
-                    />
-                    <Box className={classes.backButtonContainer} position={"sticky"}>
-                        <Button className={classes.backButton} onClick={this.handleCloseCart}  color={"default"}  >رجوع</Button>
-                    </Box>
-                </Dialog>
+                    <Dialog fullScreen open={this.state.openCart} onClose={this.handleCloseCart}
+                            TransitionComponent={Transition} dir={"rtl"}>
+                        <AddOrderFormContainer
+                            cart={this.props.cart}
+                            removeItemFromCart={this.props.removeItemFromCart}
+                            addItemToCart={this.props.addItemToCart}
+                            removeAllItemFromCart={this.props.removeAllItemFromCart}
+                            removeAllCart={this.props.removeAllCart}
+                            onSubmitOrder={this.onSubmitOrder}
+                            room={this.state.room}
+                            display={displayForMobile}
+                        />
+                        <Box className={classes.backButtonContainer} position={"sticky"}>
+                            <Button className={classes.backButton} onClick={this.handleCloseCart}
+                                    color={"default"}>رجوع</Button>
+                        </Box>
+                    </Dialog>
 
-                <Snackbar
+                    <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'left',
@@ -276,7 +274,7 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
                         className={classes.message}
                         color={"primary"}
                         open={this.state.messageStatus}
-                        autoHideDuration={4000}
+                        autoHideDuration={2000}
                         transitionDuration={50}
                         onClose={this.messageClose}
                         message={this.state.message}
@@ -285,16 +283,19 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
                                 <IconButton size="small" aria-label="close" color="inherit" onClick={this.messageClose}>
                                     <Close fontSize="small"/>
                                 </IconButton>
+
                             </>
                         }
                     />
                 </>
             );
-        } else {
+        }
+    else
+        {
             return <InterfaceImageWithText imageSrc={"img/warning.svg"} textUnderImage={" نأسف... يبدو ان هنالك خطآ"}
                                            imageAlt={"خطر"}/>
         }
     }
-}
+    }
 
-export default withWidth()(withStyles(styles)(connector(AddOrderContainer)))
+    export default  withWidth()(withStyles(styles)(connector(withRouter(AddOrderContainer))))

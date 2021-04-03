@@ -26,12 +26,12 @@ class AddAdminForm extends Component<Props> {
         return ( <Grid item lg={4}>
                 <Form fields={[
                     {as: Text, name: 'name', extra: {label: ' الاسم'}},
-                    {as: Text, name: 'email', extra: {label: ' الاميل'}},
+                    {as: Text, name: 'email', extra: {label: ' البريد الألكتروني'}},
                     {as: Password, name: 'password', extra: {label: ' الرمز السري'}},
                     {as: Checkbox, name: 'operations', extra: {label: ' اتمام طلبات'}},
                     {as: Checkbox, name: 'reports', extra: {label: ' انشاء تقارير'}},
                     {as: Checkbox, name: 'inventory', extra: {label: ' عمل تعديلات'}},
-                    {as: Checkbox, name: 'superAdmin', extra: {label: 'اضافة/تعديل مسؤلين'}}
+                    {as: Checkbox, name: 'superAdmin', extra: {label: 'إضافة/تعديل مسؤولين'}}
                 ]}
 
                       // listen={{

@@ -24,13 +24,12 @@ const styles = (theme:any) => ({
         width: theme.spacing(30),
     },
     imageInTop:{
-        paddingTop:theme.spacing(0)
+        height: theme.spacing(35),
+        paddingTop:theme.spacing(8)
     },
     imageInCenter:{
         paddingTop:theme.spacing(13)
     }
-
-
 
 });
 class InterfaceImageWithText extends Component<Props> {

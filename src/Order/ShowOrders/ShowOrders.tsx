@@ -7,7 +7,6 @@ import {withStyles} from "@material-ui/core";
 import SocketIO from "socket.io-client";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import InterfaceImageWithText from "../../helperComponents/InterfaceImageWithText";
-
 const styles = (theme: any) => ({
     root: {
         overflow:"scroll",
@@ -18,8 +17,6 @@ const styles = (theme: any) => ({
         height: "93vh",
         width: "100vw"
     }
-
-
 })
 
 enum LoadingStatus {
@@ -52,6 +49,7 @@ class ShowOrders extends Component<Props> {
     private socket: SocketIOClient.Socket | null = null;
 
     getOrders = async () => {
+
         try {
             const res = await axios.get(this.props.getUrl);
             this.setState({orders: res.data, status: 1});
@@ -59,6 +57,8 @@ class ShowOrders extends Component<Props> {
 
             this.socket.on('NEW_ORDER', (data: any) => {
                 const orders = [ ...this.state.orders ,data];
+                const audioObj = new Audio('./done.mp3');
+                audioObj.play().then()
                 this.setState({orders: orders});
             });
 
@@ -123,6 +123,7 @@ class ShowOrders extends Component<Props> {
         const {orders, status} = this.state
         const {classes, auth} = this.props;
 
+
         if (status === 0) {
             return <CircularProgress/>
         } else if (orders.length === 0) {
@@ -136,7 +137,7 @@ class ShowOrders extends Component<Props> {
                     </Grid>
             );
         } else {
-            return <InterfaceImageWithText imageSrc={"img/warning.svg"} textUnderImage={" نأسف... يبدو ان هنالك خطآ"}
+            return <InterfaceImageWithText imageSrc={"img/warning.svg"} textUnderImage={" نأسف... يبدو ان هنالك خطأ"}
                                 imageAlt={"خطر"}/>
         }
 

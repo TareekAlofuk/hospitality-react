@@ -6,7 +6,7 @@ import {setIsGuest, setName, setNote, setRoom} from "../../../Store/Action/Order
 import {withStyles} from "@material-ui/core/styles";
 import {Favorite, FavoriteBorder} from "@material-ui/icons";
 
-interface Props {
+interface Props  {
     onSubmitOrder: any,
     classes?: any,
     orderMetaData: any;
@@ -106,7 +106,7 @@ class MetadataForm extends Component<Props & ReduxProps> {
                     <TextField
                         name={"note"}
                         className={classes.input}
-                        label="ملاحضات"
+                        label="ملاحظات"
                         onChange={this.noteHandler}
                         value={this.props.orderMetaData.note}
                         multiline
