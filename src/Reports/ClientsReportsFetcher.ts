@@ -6,15 +6,17 @@ interface Options extends FetcherOptions{
     url : string;
 }
 
-class AxiosReceiver extends  DataFetcherBase<Options>{
+class ClientsReportsFetcher extends  DataFetcherBase<Options>{
     protected async fetchData(): Promise<any> {
-        const data = await axios({
+        let  data:any = await axios({
             method: this.getOptions().method ?? 'get',
             url: this.getOptions().url
         });
-        console.log(data.data)
-        return data.data;
+        data = data.data
+        data.sort((a:any , b:any )=>{return  b.itemsCount -  a.itemsCount })
+        console.log(data)
+        return data;
     }
 }
 
-export default AxiosReceiver
+export default ClientsReportsFetcher

@@ -4,7 +4,7 @@ import SuperAdminRoutes from './SuperAdminRoutes'
 import ClientRoutes from "./ClientRoutes";
 import PublicRoutes from "./PublicRoutes";
 import OperationsRoutes from "./OperationsRoutes";
-
+import ReportsRoutes from "./ReportsRoutes";
 interface Props  {
 
 }
@@ -24,6 +24,9 @@ class RoutesContainer extends Component<Props> {
         }
         if (permissions.superAdmin){
             routes.push(<SuperAdminRoutes key={'superAdmin'}/>)
+        }
+        if (permissions.reports){
+            routes.push(<ReportsRoutes key={'reports'}/>)
         }
         if (routes.length === 0 ){
             routes.push(<PublicRoutes key={'public'}/>)

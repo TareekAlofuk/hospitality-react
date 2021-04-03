@@ -3,6 +3,7 @@ import {Route} from "react-router-dom";
 import {Switch} from "react-router-dom";
 import ShowOrders from "../Order/ShowOrders/ShowOrders";
 import {Endpoints} from "../Shared/Endpoints/Endpoints";
+import Reports from "../Reports/Reports";
 
 
 class OperationsRoutes extends React.Component {
@@ -12,7 +13,7 @@ class OperationsRoutes extends React.Component {
         return (
             <Switch>
 
-                <Route exact path={"/Order"}><ShowOrders auth={"operations"}
+                <Route  path={"/Order"}><ShowOrders auth={"operations"}
                                                          getUrl={Endpoints.Order.get}
                                                          deleteUrl={Endpoints.Order.delete}
                                                          updateUrl={Endpoints.Order.UpdateStatus}/></Route>
@@ -24,6 +25,7 @@ class OperationsRoutes extends React.Component {
                                                          getUrl={Endpoints.Order.showWaitingOrder}
                                                          deleteUrl={Endpoints.Order.delete}
                                                          updateUrl={Endpoints.Order.UpdateStatus}/></Route>
+
             </Switch>
 
         );

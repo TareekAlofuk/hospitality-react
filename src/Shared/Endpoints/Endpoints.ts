@@ -38,24 +38,46 @@ export interface IEndpoints {
         UpdateStatus:(id:string)=>string ;
         showUnderwayOrder:string;
         showWaitingOrder:string;
+    },
+    report:{
+        AllClientsReport:any
     }
+
 }
 
+// function root() {
+//     return "http://192.168.20.10:3100";
+// }
+// function makeEndpoint(route: string): string {
+//     const baseUrl = "http://192.168.20.10:3100/api/";
+//     return `${baseUrl}${route}`
+// }
+//
+// function makeFileUrl(route: string): string {
+//     const baseUrl = "http://192.168.20.10:3100/";
+//     return `${baseUrl}${route}`
+// }
+//
+// function makeEndpointWithId(route: string, id: string): string {
+//     const baseUrl = "http://192.168.20.10:3100/api/";
+//     return `${baseUrl}${route}${"/"}${id}`
+// }
+
 function root() {
-    return "http://192.168.20.10:3100";
+    return "http://127.0.0.1:3100";
 }
 function makeEndpoint(route: string): string {
-    const baseUrl = "http://192.168.20.10:3100/api/";
+    const baseUrl = "http://127.0.0.1:3100/api/";
     return `${baseUrl}${route}`
 }
 
 function makeFileUrl(route: string): string {
-    const baseUrl = "http://192.168.20.10:3100/";
+    const baseUrl = "http://127.0.0.1:3100/";
     return `${baseUrl}${route}`
 }
 
 function makeEndpointWithId(route: string, id: string): string {
-    const baseUrl = "http://192.168.20.10:3100/api/";
+    const baseUrl = "http://127.0.0.1:3100/api/";
     return `${baseUrl}${route}${"/"}${id}`
 }
 
@@ -125,5 +147,8 @@ export const Endpoints: IEndpoints = {
         },
         showUnderwayOrder:makeEndpoint("Order/Underway"),
         showWaitingOrder:makeEndpoint(("Order/Waiting"))
+    } ,
+    report:{
+        AllClientsReport:makeEndpoint('Order/AllClientsReport')
     }
 }

@@ -152,6 +152,20 @@ class NavigationBar extends Component<Props> {
                                     </> : ""
                                 }
                                 {
+                                    permissions.reports ? <>
+                                        <Grid item>
+                                            <Link to={'/ClientsReport'} className={classes.link}>
+                                                <Button
+                                                    onClick={this.closeNavbar}
+                                                    className={classes.button}>
+                                                    احصائية الطلبات
+                                                </Button>
+                                            </Link>
+                                        </Grid>
+
+                                    </> : ""
+                                }
+                                {
                                     permissions.operations ? <>
                                         <Grid item>
                                             <Link to={'/Order'} className={classes.link}>
