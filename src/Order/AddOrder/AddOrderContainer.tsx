@@ -236,7 +236,7 @@ class AddOrderContainer extends Component<ReduxProps & Props> {
 
                     </Grid>
                     {isMobile ?
-                        <Box className={classes.seeMore} position={"absolute"}>
+                        <Box className={classes.seeMore} position={"sticky"}>
                             <Button className={classes.seeMoreButton} onClick={this.handleClickOpenCart}>
                                 عرض السلة
                             </Button>

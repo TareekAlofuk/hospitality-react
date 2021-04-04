@@ -51,7 +51,7 @@ class ShowAdmins extends Component<Props> {
                 to={'./AddAdmin'}
                 variant={'contained'}
             >
-                 إضافة مسؤل
+                 إضافة مسؤول
             </Button>
         </Grid>
 

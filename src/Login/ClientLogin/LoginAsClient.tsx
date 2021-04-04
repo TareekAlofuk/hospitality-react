@@ -46,7 +46,7 @@ class LoginAsClient extends Component<Props> {
                         {as: Text, name: 'clientName', extra: {label: 'الاسم'}},
                         {
                             as: Select, name: 'roomName', extra: {
-                                label: 'اسم الغرفة',
+                                label: 'الموقع',
                                 options: this.props.rooms
                             }
                         }

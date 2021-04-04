@@ -14,6 +14,12 @@ const styles = () => ({
     },
     count:{
         color:'#C0C0C0'
+    },
+    icons:{
+        fontSize:'20px'
+    },
+    button:{
+        minWidth:"0"
     }
 
 });
@@ -62,8 +68,9 @@ class CartItem extends Component<Props> {
                         <Button
                             variant={"contained"}
                             onClick={this.removeItemFromCart}
+                            className={classes.button}
                         >
-                            <Remove/>
+                            <Remove className={classes.icons}/>
                         </Button>
                     </Grid>
 
@@ -71,8 +78,9 @@ class CartItem extends Component<Props> {
                         <Button
                             onClick={this.addItemToCart}
                             variant={"contained"}
+                            className={classes.button}
                         >
-                            <AddIcon/>
+                            <AddIcon className={classes.icons}/>
                         </Button>
                     </Grid>
 
@@ -81,8 +89,9 @@ class CartItem extends Component<Props> {
                             onClick={this.removeAllItemFromCart}
                             color={"secondary"}
                             variant={"contained"}
+                            className={classes.button}
                         >
-                            <DeleteOutlineIcon/>
+                            <DeleteOutlineIcon className={classes.icons} />
                         </Button>
                     </Grid>
 

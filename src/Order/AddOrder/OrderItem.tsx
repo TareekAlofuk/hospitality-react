@@ -1,11 +1,11 @@
 import {Component} from "react";
-import {Box, Button, Grid, IconButton, Typography} from "@material-ui/core";
+import {Box, Button, Grid, Typography} from "@material-ui/core";
 import Popover from '@material-ui/core/Popover';
 import {withStyles} from "@material-ui/core/styles";
-import MinimizeIcon from "@material-ui/icons/Minimize";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import {withWidth} from "@material-ui/core";
+import {Remove} from "@material-ui/icons";
 
 interface Props {
     item: {
@@ -40,7 +40,7 @@ const styles = (theme: any) => ({
         fontSize: "24px !important",
     },
     image: {
-        height: "60px",
+        height: "100px",
     },
     imageContainer: {
         height: "15vh",
@@ -51,6 +51,13 @@ const styles = (theme: any) => ({
         backgroundColor: theme.palette.grey[100],
         padding: "10px",
         marginBottom:"10px"
+    },
+    icons:{
+        fontSize:"15px"
+    },
+    button:{
+        minWidth:'0',
+        margin:"10px"
     }
 
 });
@@ -97,7 +104,7 @@ class OrderItem extends Component<Props> {
     render() {
         const {item} = this.props
         const {classes, width} = this.props
-        const isMobile = width === 'xs' || width === 'sm'
+        // const isMobile = width === 'xs' || width === 'sm'
         const open = Boolean(this.state.anchorEl);
         const id = open ? 'simple-popover' : undefined;
         return (
@@ -109,7 +116,9 @@ class OrderItem extends Component<Props> {
                     onClick={this.addItemToCart}
                     onMouseDown={this.handleMouseDown}
                     onMouseUp={this.handleMouseUp}
-
+                    onTouchStart={this.handleMouseDown}
+                    onTouchEnd={this.handleMouseUp}
+                    onContextMenu={event => event.preventDefault()}
                 >
                     <Grid container>
                         <Grid item container md={12} className={classes.imageContainer} justify={"center"}
@@ -154,12 +163,12 @@ class OrderItem extends Component<Props> {
                     }}
                 >
                     <Grid item container justify={"center"} alignItems={"center"}>
-                        <Grid item md={12}>
+                        <Grid item xs={12} md={12}>
                             <Typography className={classes.itemNameInPop} variant={"h5"} align={"center"}>
                                 {this.props.item.itemName}
                             </Typography>
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item xs={12} md={12}>
                             <Box>
                                 <Typography className={classes.count} variant={"h5"} align={"center"}>
                                     {this.props.count}
@@ -168,28 +177,34 @@ class OrderItem extends Component<Props> {
                         </Grid>
                         <Grid item container justify={"center"}>
                             <Grid item md={2}>
-                                <IconButton
+                                <Button
                                     onClick={this.removeItemFromCart}
+                                    variant={"contained"}
+                                    className={classes.button}
                                 >
-                                    <MinimizeIcon/>
-                                </IconButton>
+                                    <Remove className={classes.icons}/>
+                                </Button>
                             </Grid>
 
                             <Grid item md={2}>
-                                <IconButton
+                                <Button
                                     onClick={this.addItemToCart}
+                                    variant={"contained"}
+                                    className={classes.button}
                                 >
-                                    <AddIcon/>
-                                </IconButton>
+                                    <AddIcon className={classes.icons}/>
+                                </Button>
                             </Grid>
 
                             <Grid item md={2}>
-                                <IconButton
+                                <Button
                                     onClick={this.removeAllItemFromCart}
                                     color={"secondary"}
+                                    variant={"contained"}
+                                    className={classes.button}
                                 >
-                                    <DeleteOutlineIcon/>
-                                </IconButton>
+                                    <DeleteOutlineIcon className={classes.icons}/>
+                                </Button>
                             </Grid>
 
                         </Grid>
