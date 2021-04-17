@@ -8,7 +8,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import {Close} from "@material-ui/icons";
-
+import AccessTime from '@material-ui/icons/AccessTime';
 const styles = (theme: any) => ({
     root: {
         backgroundColor: "#fff",
@@ -56,6 +56,11 @@ interface Props {
 
 class OrderCard extends Component<Props> {
 
+
+     convertTZ = (date:any, tzString:any) => {
+        return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));
+    }
+
     render() {
         const {order, deleteOrder, auth, UpdateStatus} = this.props;
         const {classes} = this.props;
@@ -75,6 +80,11 @@ class OrderCard extends Component<Props> {
                 <Grid item container className={classes.roomName} alignItems="center">
                     <Grid item><RoomOutlinedIcon fontSize={"default"} color={'primary'}/></Grid>
                     <Grid item className={classes.text}>{order.client.roomName}</Grid>
+                </Grid>
+
+                <Grid item container className={classes.roomName} alignItems="center">
+                    <Grid item><AccessTime fontSize={"default"} color={'primary'}/></Grid>
+                    <Grid item className={classes.text}>{order.time}</Grid>
                 </Grid>
 
                 <Grid item container >
