@@ -54,13 +54,17 @@ class ShowOrders extends Component<Props> {
             const res = await axios.get(this.props.getUrl);
             this.setState({orders: res.data, status: 1});
             this.socket = SocketIO(Endpoints.root);
+            const permissions =  JSON.parse(localStorage.getItem("permissions") || "{}");
 
-            this.socket.on('NEW_ORDER', (data: any) => {
-                const orders = [ ...this.state.orders ,data];
-                const audioObj = new Audio('./done.mp3');
-                audioObj.play().then()
-                this.setState({orders: orders});
-            });
+            if (permissions.operations){
+                this.socket.on('NEW_ORDER', (data: any) => {
+                    const orders = [ ...this.state.orders ,data];
+                    const audioObj = new Audio('./done.mp3');
+                    audioObj.play().then()
+                    this.setState({orders: orders});
+                });
+            }
+
 
             this.socket.on('ORDER_STATUS_CHANGED', (data: any) => {
                 const orders = this.state.orders.map((order: any) => {

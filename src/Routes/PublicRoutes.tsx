@@ -4,7 +4,6 @@ import {Switch} from "react-router-dom";
 import LoginAsClientContainer from "../Login/ClientLogin/LoginAsClientContainer";
 import LoginAsAdmin from "../Login/AdminLogin/LoginAsAdmin";
 import MainLoginPage from "../Login/MainLoginPage";
-import Reports from "../Reports/Reports";
 
 
 class PublicRoutes extends React.Component {
