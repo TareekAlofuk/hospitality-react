@@ -58,7 +58,7 @@ class ShowOrders extends Component<Props> {
 
             if (permissions.operations){
                 this.socket.on('NEW_ORDER', (data: any) => {
-                    const orders = [ ...this.state.orders ,data];
+                    const orders = [ data , ...this.state.orders ];
                     const audioObj = new Audio('./done.mp3');
                     audioObj.play().then()
                     this.setState({orders: orders});
