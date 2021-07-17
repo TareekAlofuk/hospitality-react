@@ -104,7 +104,6 @@ class OrderItem extends Component<Props> {
     render() {
         const {item} = this.props
         const {classes, width} = this.props
-        // const isMobile = width === 'xs' || width === 'sm'
         const open = Boolean(this.state.anchorEl);
         const id = open ? 'simple-popover' : undefined;
         return (

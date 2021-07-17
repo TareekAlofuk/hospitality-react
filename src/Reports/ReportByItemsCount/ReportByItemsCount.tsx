@@ -1,12 +1,9 @@
 import React, {Component} from 'react'
-import Axios from "axios";
-import {Endpoints} from "../Shared/Endpoints/Endpoints";
+import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {AutoCollection, IAutoCollection} from "@autofiy/rac-core";
 import {Table} from "@autofiy/rac-material";
-import {Button, Grid, TableCell, withStyles} from "@material-ui/core";
-import {Link} from "react-router-dom";
-import AxiosReceiver from "../AxiosReceiver";
-import ClientsReportsFetcher from "./ClientsReportsFetcher";
+import {Grid, withStyles} from "@material-ui/core";
+import ClientsReportsFetcher from "../ReportByEmployeesName/ClientsReportsFetcher";
 
 
 const styles = (theme: any) => ({
@@ -21,7 +18,9 @@ const styles = (theme: any) => ({
 })
 
 interface Props {
-    classes?: any
+    classes?: any,
+    month:number,
+    year:number
 }
 
 class Reports extends Component<Props> {
@@ -29,7 +28,9 @@ class Reports extends Component<Props> {
 
 
     render() {
-        const {classes} = this.props
+        const {classes , month} = this.props
+        console.log(this.props)
+
         return <Grid item container justify={"center"} alignItems={'center'} className={classes.root}>
 
 
@@ -38,19 +39,19 @@ class Reports extends Component<Props> {
 
                 <AutoCollection as={Table}
                                 properties={{
-                                    orderBy: ['_id', 'ordersCount', 'itemsCount'],
+                                    orderBy: ['itemName', 'itemCount'],
                                     extraProperties: [
                                         {name: 'actions', title: ' '}
                                     ],
                                     titles: {
-                                        _id: 'الأسم',
-                                        ordersCount: 'عدد الطلبات',
-                                        itemsCount:"عدد العناصر في كل الطلبات"
+                                        itemName: 'اسم العنصر',
+                                        itemCount: 'عدد الطلبات',
                                     }
                                 }}
+
                                 extra={{
                                     dataSourceOptions: {
-                                        url: Endpoints.report.AllClientsReport
+                                        url: Endpoints.report.ReportByMonth(month)
                                     }
                                 }}
 

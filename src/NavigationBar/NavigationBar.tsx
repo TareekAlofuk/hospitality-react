@@ -154,7 +154,7 @@ class NavigationBar extends Component<Props> {
                                 {
                                     permissions.reports ? <>
                                         <Grid item>
-                                            <Link to={'/ClientsReport'} className={classes.link}>
+                                            <Link to={'/Report'} className={classes.link}>
                                                 <Button
                                                     onClick={this.closeNavbar}
                                                     className={classes.button}>

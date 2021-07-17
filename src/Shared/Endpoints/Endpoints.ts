@@ -41,6 +41,7 @@ export interface IEndpoints {
     },
     report:{
         AllClientsReport:any
+        ReportByMonth:any
     }
 
 }
@@ -58,7 +59,7 @@ export interface IEndpoints {
 //     return `${baseUrl}${route}`
 // }
 //
-// function makeEndpointWithId(route: string, id: string): string {
+// function makeEndpointWithData(route: string, id: string): string {
 //     const baseUrl = "http://192.168.20.10:3100/api/";
 //     return `${baseUrl}${route}${"/"}${id}`
 // }
@@ -66,6 +67,7 @@ export interface IEndpoints {
 function root() {
     return "http://127.0.0.1:3100";
 }
+
 function makeEndpoint(route: string): string {
     const baseUrl = "http://127.0.0.1:3100/api/";
     return `${baseUrl}${route}`
@@ -76,9 +78,9 @@ function makeFileUrl(route: string): string {
     return `${baseUrl}${route}`
 }
 
-function makeEndpointWithId(route: string, id: string): string {
+function makeEndpointWithData(route: string, data: any): string {
     const baseUrl = "http://127.0.0.1:3100/api/";
-    return `${baseUrl}${route}${"/"}${id}`
+    return `${baseUrl}${route}${"/"}${data}`
 }
 
 export const Endpoints: IEndpoints = {
@@ -88,10 +90,10 @@ export const Endpoints: IEndpoints = {
         getActiveItems:makeEndpoint("Item/ActiveItems"),
         add:makeEndpoint("Item/Add"),
         delete: (id: string): string => {
-            return makeEndpointWithId("Item/Delete", id)
+            return makeEndpointWithData("Item/Delete", id)
         },
         edit: (id: string): string => {
-            return makeEndpointWithId("Item/Update", id)
+            return makeEndpointWithData("Item/Update", id)
         },
         uploadImage: makeEndpoint("Item/UploadImage"),
         image : name => makeFileUrl(`ItemImage/${name}`)
@@ -100,20 +102,20 @@ export const Endpoints: IEndpoints = {
         get: makeEndpoint("ItemType"),
         add: makeEndpoint("ItemType/Add"),
         delete: (id: string): string => {
-            return makeEndpointWithId("ItemType/Delete", id)
+            return makeEndpointWithData("ItemType/Delete", id)
         },
         edit: (id: string): string => {
-            return makeEndpointWithId("ItemType/Update", id)
+            return makeEndpointWithData("ItemType/Update", id)
         },
     },
     room:{
         get: makeEndpoint("Room"),
         add: makeEndpoint("Room/Add"),
         delete: (id: string): string => {
-            return makeEndpointWithId("Room/Delete", id)
+            return makeEndpointWithData("Room/Delete", id)
         },
         edit: (id: string): string => {
-            return makeEndpointWithId("Room/Update", id)
+            return makeEndpointWithData("Room/Update", id)
         },
 
     },
@@ -122,10 +124,10 @@ export const Endpoints: IEndpoints = {
         add: makeEndpoint("Admin/Add"),
         login:makeEndpoint("Admin/Login"),
         delete: (id: string): string => {
-            return makeEndpointWithId("Admin/Delete", id)
+            return makeEndpointWithData("Admin/Delete", id)
         },
         edit: (id: string): string => {
-            return makeEndpointWithId("Admin/Update", id)
+            return makeEndpointWithData("Admin/Update", id)
         },
 
     } ,
@@ -133,22 +135,25 @@ export const Endpoints: IEndpoints = {
     Order:{
         get: makeEndpoint("Order"),
         getClientOrder:(userId: string): string => {
-            return makeEndpointWithId("Order/showClientOrders", userId)
+            return makeEndpointWithData("Order/showClientOrders", userId)
         },
         add: makeEndpoint("Order/Add"),
         delete: (id: string): string => {
-            return makeEndpointWithId("Order/Delete", id)
+            return makeEndpointWithData("Order/Delete", id)
         },
         edit: (id: string): string => {
-            return makeEndpointWithId("Order/Update", id)
+            return makeEndpointWithData("Order/Update", id)
         },
         UpdateStatus: (id: string): string => {
-            return makeEndpointWithId("Order/UpdateStatus", id)
+            return makeEndpointWithData("Order/UpdateStatus", id)
         },
         showUnderwayOrder:makeEndpoint("Order/Underway"),
         showWaitingOrder:makeEndpoint(("Order/Waiting"))
     } ,
     report:{
-        AllClientsReport:makeEndpoint('Order/AllClientsReport')
+        AllClientsReport:makeEndpoint('Order/AllClientsReport'),
+        ReportByMonth: (month:number): string => {
+            return makeEndpointWithData('Order/ReportByMonth', month)
+        }
     }
 }

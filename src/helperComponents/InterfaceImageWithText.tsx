@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {Box, Grid, Typography, withStyles, withWidth} from "@material-ui/core";
+import { Grid, Typography, withStyles, withWidth} from "@material-ui/core";
 
 
 
