@@ -7,6 +7,7 @@ import Reports from "./ReportByEmployeesName/Reports";
 const styles = (theme: any) => ({
     root: {
         marginTop:"5vh",
+        width:'100vw'
     },
     table:{
         width:'100vw'
