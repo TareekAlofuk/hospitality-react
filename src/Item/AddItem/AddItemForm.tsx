@@ -39,19 +39,7 @@ class AddItemForm extends Component<Props> {
                         }
                     },
                     {as: Checkbox, name: 'isActive', extra: {label: 'نشط'}},
-                    // {
-                    //     as: AutoUpload, name: 'image', extra: {
-                    //         __label: 'Add image',
-                    //         uploadedFileExtractorFromResponse: (res: any) => {
-                    //             const json = JSON.parse(res);
-                    //             return Endpoints.item.image(json.url);
-                    //         },
-                    //         uploadOptions: {
-                    //             url: Endpoints.item.uploadImage
-                    //         }
-                    //     }
-                    // }
-
+                    {as: Text, name: 'image', extra: {label: 'اسم صورة العنصر'}},
                 ]}
                       initialValues={{'isActive': true}}
 

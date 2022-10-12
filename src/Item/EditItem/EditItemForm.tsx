@@ -47,15 +47,7 @@ class EditItemForm extends Component<Props> {
                         }
                     },
                     {as: Checkbox, name: 'isActive', extra: {__label: 'Activity'}},
-                    // {
-                    // as:AutoUpload, name: 'image'   , extra: {
-                    //     __label: 'Add image',
-                    //             uploadOptions : {
-                    //             url : Endpoints.item.uploadImage
-                    //             }
-                    // }
-                    // }
-
+                    {as: Text, name: 'image', extra: {label: 'اسم صورة العنصر'}},
                 ]}
 
 
