@@ -12,7 +12,6 @@ class ClientsReportsFetcher extends  DataFetcherBase<Options>{
             method: this.getOptions().method ?? 'get',
             url: this.getOptions().url
         });
-        console.log(data)
         data = data.data
         data.sort((a:any , b:any )=>{return  b.itemsCount -  a.itemsCount })
         return data;
