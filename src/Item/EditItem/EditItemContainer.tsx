@@ -55,7 +55,7 @@ class EditItemContainer extends Component<Props> {
         } else if (this.state.status === 'SUCESS') {
             return <EditItemForm itemTypeRadios={this.state.itemTypeRadios} item={item}/>
         } else {
-            return <Alert severity="error">Ther is an error</Alert>
+            return <Alert severity="error">هنالك خطا</Alert>
         }
 
 

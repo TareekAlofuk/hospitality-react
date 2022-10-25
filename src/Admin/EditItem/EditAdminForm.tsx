@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form} from "@autofiy/raf-core";
 import {Checkbox, Text} from "@autofiy/raf-material";
-import {Box, Button, Grid} from "@material-ui/core";
+import { Button, Grid} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import AxiosSubmitter from "../../AxiosSubmitter";
@@ -40,18 +40,7 @@ class EditAdminForm extends Component<Props> {
                     {as: Checkbox, name: 'superAdmin', extra: {label: ' اضافة/تعديل مسؤلين'}}
                 ]}
 
-                    // listen={{
-                    //     [GlobalEvents.SUBMIT_FAILED]: (form, data) => {
-                    //         if (JSON.parse(data.response).errors.email.path === 'email') {
-                    //             alert('the email should be uniqu')
-                    //         }
-                    //     },
-                    //     [GlobalEvents.SUBMIT_SUCCEEDED]: (form: IForm) => {
-                    //         console.log('admin')
-                    //         this.props.history.push('/Admin');
-                    //     }
-                    // }}
-
+                   
                       initialValues={
                           {
                               name: admin.name,

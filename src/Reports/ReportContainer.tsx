@@ -21,7 +21,7 @@ const styles = (theme: any) => ({
     }
 })
 
-enum LoadingStatus {
+export enum LoadingStatus {
     LOADING = 0,
     SUCCESS = 1,
     ERROR = 2,
@@ -86,7 +86,7 @@ class ReportContainer extends React.Component<any, any> {
         this.setState({ statisticType: 3 , status:0 })
         await this.getDataOfRequestedItemsByClients(this.state.month)
     }
-    
+
     setMonth = async (e: any) => {
         if (e.key === 'Enter') {
             this.setState({ month: (e.target.value || 0) });
@@ -123,7 +123,7 @@ class ReportContainer extends React.Component<any, any> {
                 </Grid> : " "
             }
             {statisticType === 2  ?
-                <MonthlyCompleteReport clients={CompleteMonthlyReportData} />
+                <MonthlyCompleteReport clients={CompleteMonthlyReportData} status={status} />
                 : " "
             }
             {statisticType === 3 ?

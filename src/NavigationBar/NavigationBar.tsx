@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {AppBar, Box, Button, Fade, Grid, IconButton, Tooltip, withStyles, withWidth} from "@material-ui/core";
+import {AppBar, Button, Fade, Grid, IconButton, Tooltip, withStyles, withWidth} from "@material-ui/core";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Link, RouteComponentProps, withRouter} from "react-router-dom";
 import ViewHeadlineIcon from '@material-ui/icons/ViewHeadline';

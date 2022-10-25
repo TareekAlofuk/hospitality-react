@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import  {Component} from 'react'
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {AutoCollection, IAutoCollection} from "@autofiy/rac-core";
 import {Table} from "@autofiy/rac-material";

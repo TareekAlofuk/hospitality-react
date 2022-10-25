@@ -1,8 +1,7 @@
 import {Component} from "react";
-import {Box, Button, Grid, IconButton, Typography} from "@material-ui/core";
+import {Box, Button, Grid, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
-import MinimizeIcon from '@material-ui/icons/Minimize';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import {Remove} from "@material-ui/icons";
 

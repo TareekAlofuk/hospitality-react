@@ -8,6 +8,7 @@ import { Endpoints } from '../../Shared/Endpoints/Endpoints';
 import axios from 'axios';
 import InterfaceImageWithText from "../../helperComponents/InterfaceImageWithText";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { LoadingStatus } from '../ReportContainer';
 
 
 
@@ -30,10 +31,7 @@ const styles = (theme: any) => ({
         borderRadius: "5px",
         marginLeft: "10px"
     },
-    isGuest: {
-        borderTop: '1px ridge #1C6EA4',
-        borderColor: theme.palette.primary.light
-    },
+  
     cardButton: {
         marginRight: "10px"
     },
@@ -53,14 +51,13 @@ const styles = (theme: any) => ({
 interface Props {
     clients: any,
     classes: any,
-    status: any
+    status: LoadingStatus
 }
 class RequestedItemsByEmployees extends Component<Props> {
 
 
     render() {
         const { classes, clients, status } = this.props;
-        console.log(status)
         if (status === 0) return <CircularProgress />
         if (status === 2) return <InterfaceImageWithText imageSrc={"img/warning.svg"} textUnderImage={" نأسف... يبدو ان هنالك خطأ"} imageAlt={"خطر"} />
         return clients.map((client: any, index: number) => {

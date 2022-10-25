@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {Button, Grid, withStyles} from "@material-ui/core";
-import {Form, GlobalEvents, IForm} from "@autofiy/raf-core";
+import {Form} from "@autofiy/raf-core";
 import {Password, Text} from "@autofiy/raf-material";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
@@ -47,18 +47,7 @@ class LoginAsAdmin extends Component<Props> {
                     {as: Password, name: 'password', extra: {label: 'الرمز السري'}},
                 ]}
 
-                    // listen={{
-                    //     [GlobalEvents.SUBMIT_FAILED]: (form, data) => {
-                    //         console.log(data.response)
-                    //     },
-                    //     [GlobalEvents.SUBMIT_SUCCEEDED]: (form: IForm, data) => {
-                    //         const permissions = JSON.parse(data.response).data.permissions;
-                    //         console.log(permissions)
-                    //         localStorage.setItem("jwt", JSON.parse(data.response).token)
-                    //         this.props.dispatch(setPermission(permissions))
-                    //         alert('login successfully')
-                    //     }
-                    // }}
+                  
                       services={{
                           submitter: (form: any): any => new AxiosSubmitter(
                               form,

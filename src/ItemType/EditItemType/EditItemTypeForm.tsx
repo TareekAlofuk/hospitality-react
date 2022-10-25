@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form} from "@autofiy/raf-core";
 import {Text} from "@autofiy/raf-material";
-import {Button , Grid , Box} from "@material-ui/core";
+import {Button , Grid } from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import {withRouter , RouteComponentProps} from "react-router-dom";
 import AxiosSubmitter from "../../AxiosSubmitter";

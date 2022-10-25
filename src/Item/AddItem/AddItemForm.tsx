@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form} from "@autofiy/raf-core";
-import {AutoUpload, Checkbox, KeyValueFormRenderer , SimpleFormRenderer , Radio, Text} from "@autofiy/raf-material";
-import {Box, Button , Grid} from "@material-ui/core";
+import { Checkbox , SimpleFormRenderer , Radio, Text} from "@autofiy/raf-material";
+import { Button , Grid} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import AxiosSubmitter from "../../AxiosSubmitter";
 import {RouteComponentProps, withRouter} from "react-router-dom";

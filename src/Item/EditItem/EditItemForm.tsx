@@ -1,7 +1,7 @@
 import {Component} from "react";
 import {Form, GlobalEvents} from "@autofiy/raf-core";
 import {Checkbox, Radio, Text} from "@autofiy/raf-material";
-import {Box, Button, Grid} from "@material-ui/core";
+import { Button, Grid} from "@material-ui/core";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
 import AxiosSubmitter from "../../AxiosSubmitter";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -76,7 +76,7 @@ class EditItemForm extends Component<Props> {
                               actions: [
                                   (form: any) => <Button color={"primary"} variant={'contained'}
                                                          className={classes.ButtonContainer}
-                                                         onClick={() => form.submit()}>EDIT</Button>
+                                                         onClick={() => form.submit()}>تعديل</Button>
                               ],
                               actionsAlignments: "center"
                           },

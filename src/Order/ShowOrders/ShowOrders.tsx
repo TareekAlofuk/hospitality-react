@@ -2,7 +2,7 @@ import {Component} from 'react'
 import axios from "axios";
 import OrdersList from "./OrdersList";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {Box, Grid} from "@material-ui/core";
+import { Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import SocketIO from "socket.io-client";
 import {Endpoints} from "../../Shared/Endpoints/Endpoints";
